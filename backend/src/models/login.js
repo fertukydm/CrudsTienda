@@ -6,7 +6,15 @@ const loginSchema = new Schema(
       type: String,
       require: true,
     },
+    code:{
+        type: String,
+        require: true,
      },
+     password:{
+        type: String,
+        require: true
+    },
+},    
   {
     timestamps: true,
     strict: false,

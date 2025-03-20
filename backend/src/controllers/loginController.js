@@ -10,8 +10,8 @@ loginController.getLogin = async (req, res) => {
 
 // INSERT
 loginController.insertLogin = async (req, res) => {
-  const { mail  } = req.body;
-  const newLogin = new loginmodels({ mail });
+  const { mail, code, password } = req.body;
+  const newLogin = new loginmodels({ mail, code, password });
   await newLogin.save();
   res.json({ message: "Login saved" });
 };
@@ -24,10 +24,10 @@ loginController.deleteLogin = async (req, res) => {
 
 // UPDATE
 loginController.updateLogin = async (req, res) => {
-  const { mail } = req.body;
+  const { mail, code, password } = req.body;
   const updateLogin = await loginmodels.findByIdAndUpdate(
     req.params.id,
-    { mail },
+    { mail, code, password },
     { new: true }
   );
   res.json({ message: "login updated successfully" });
