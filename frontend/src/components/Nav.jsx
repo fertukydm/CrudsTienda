@@ -56,6 +56,11 @@ const Navbar = () => {
               </Link>
             </li>
             <li className="menu-item">
+              <Link to="/politica" className="menu-link" onClick={() => setMenuOpen(false)}>
+                Nuestra politica
+              </Link>
+            </li>
+            <li className="menu-item">
               <Link to="/mi-cuenta" className="menu-link" onClick={() => setMenuOpen(false)}>
                 Mi cuenta
               </Link>
