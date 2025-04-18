@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './Nav.css';
 
 const Navbar = () => {
@@ -7,7 +8,7 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="navbar-container">
-        {/* Botón hamburguesa (visible siempre) */}
+        {/* Botón hamburguesa */}
         <div className="menu-button-container">
           <button className="menu-button" onClick={() => setMenuOpen(!menuOpen)}>
             <img src="/29.png" alt="Menú" className="navbar-menu-icon" />
@@ -19,7 +20,7 @@ const Navbar = () => {
           OK RECORDS
         </div>
 
-        {/* Íconos de la derecha */}
+        {/* Íconos a la derecha */}
         <div className="navbar-icons">
           <button>
             <img src="/26.png" alt="Buscar" className="navbar-icon" />
@@ -34,25 +35,37 @@ const Navbar = () => {
       </div>
 
       {/* Menú hamburguesa desplegable */}
-     {/* Menú hamburguesa desplegable */}
-{menuOpen && (
-  <div className={`menu-dropdown ${menuOpen ? 'open' : ''}`}>
-    <ul className="menu-list">
-      <li className="menu-item">
-        <a href="#" className="menu-link" onClick={() => setMenuOpen(false)}>Crear cuenta</a>
-      </li>
-      <li className="menu-item">
-        <a href="#" className="menu-link" onClick={() => setMenuOpen(false)}>Contactos</a>
-      </li>
-      <li className="menu-item">
-        <a href="#" className="menu-link" onClick={() => setMenuOpen(false)}>Mi cuenta</a>
-      </li>
-    </ul>
-  </div>
-)}
-
+      {menuOpen && (
+        <div className={`menu-dropdown ${menuOpen ? 'open' : ''}`}>
+          <ul className="menu-list">
+            <li className="menu-item">
+              <Link to="/crear-cuenta" className="menu-link" onClick={() => setMenuOpen(false)}>
+                Crear cuenta
+              </Link>
+              
+            </li>
+            <li className="menu-item">
+              <Link to="/" className="menu-link" onClick={() => setMenuOpen(false)}>
+                Home
+              </Link>
+              
+            </li>
+            <li className="menu-item">
+              <Link to="/contacto" className="menu-link" onClick={() => setMenuOpen(false)}>
+                Contactos
+              </Link>
+            </li>
+            <li className="menu-item">
+              <Link to="/mi-cuenta" className="menu-link" onClick={() => setMenuOpen(false)}>
+                Mi cuenta
+              </Link>
+            </li>
+          </ul>
+        </div>
+      )}
     </nav>
   );
 };
 
 export default Navbar;
+
