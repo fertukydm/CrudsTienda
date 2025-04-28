@@ -20,7 +20,8 @@ function App() {
         <Route path="/politica" element={<Policy/>} />
         <Route path="/login" element={<Login/>} />
         <Route path="/CrearCuenta" element={<CrearCuenta/>} />
-        
+        <Route path="/ProcesoPago" element={<ProcesoPago/>} />
+        <Route path="/Carrito" element={<Carrito/>} />
       </Routes>
     </>
   );cd
