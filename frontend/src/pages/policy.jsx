@@ -1,6 +1,8 @@
 import './Policy.css';
 
 const Politicas = () => {
+
+  //odigo de Nuestra politica
   return (
     <div className="okrecords-container">
       <div className="text-content">
@@ -16,6 +18,7 @@ const Politicas = () => {
       </div>
       <br/>
 
+      
       <div className="center-image">
         <img
           src="../public/14.png"

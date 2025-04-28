@@ -5,6 +5,8 @@ import './Nav.css';
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
+  /* Menu de navegacion por iconos que aun no esta conetado y menu hambuerguesa */
+
   return (
     <nav className="navbar">
       <div className="navbar-container">

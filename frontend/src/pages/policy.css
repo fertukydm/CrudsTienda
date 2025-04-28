@@ -1,6 +1,6 @@
 
 .okrecords-container {
-    background-image: url('/12.png'); 
+    background-image: url('/12.png'); /*Imagen de fondo en todas las pantallas*/
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

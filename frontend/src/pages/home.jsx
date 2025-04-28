@@ -1,6 +1,9 @@
 import React from 'react';
 import './home.css';
 
+
+//Codigo de inicio de sesion 
+//La barra de busqueda o funciona 
 const Home = () => {
   return (
     <div className="background-image">

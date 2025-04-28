@@ -6,24 +6,23 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [subscribeEmail, setSubscribeEmail] = useState('');
 
+
+ //Logica para login 
   const handleLogin = (e) => {
     e.preventDefault();
-    // Handle login logic here
     console.log('Login attempt with:', email, password);
   };
 
   const handleSubscribe = (e) => {
     e.preventDefault();
-    // Handle subscription logic here
     console.log('Subscribe with email:', subscribeEmail);
   };
 
+  //Codigo de formulario de iniciar sesion
   return (
     <div className="ok-records-container">
-      {/* Login section */}
       <div className="login-section">
         <div className="login-card">
-          {/* Form side */}
           <div className="form-side">
             <form onSubmit={handleLogin}>
               <div className="form-group">

@@ -1,7 +1,7 @@
 
 .home-container {
   min-height: 100vh;
-  background-image: url('/12.png'); 
+  background-image: url('/12.png'); /* Imagen de fondo */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -58,7 +58,7 @@
 
 .featured-products {
   padding: 1rem;
-  background-color: rgba(238, 230, 230, 0.7); 
+  background-color: rgba(238, 230, 230, 0.7); /*Se trato de que contrastara con el fondo*/
   border-radius: 10px;
 }
 

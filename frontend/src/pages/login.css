@@ -12,7 +12,7 @@
   .login-section {
     flex: 1;
     position: relative;
-    background-image: url('12.png');
+    background-image: url('12.png');/* Imagen de fondo */
     background-size: cover;
     background-position: center;
     display: flex;
@@ -49,6 +49,7 @@
     padding: 40px;
   }
   
+  /*Responsive*/
   @media (max-width: 768px) {
     .form-side {
       width: 100%;
@@ -129,8 +130,8 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('20.png'); /* Asegúrate de que la ruta sea correcta */
-    background-size: cover; /* Ajusta la imagen para cubrir todo el contenedor */
+    background-image: url('20.png');
+    background-size: cover; 
     background-position: center; /* Centra la imagen */
   }
 

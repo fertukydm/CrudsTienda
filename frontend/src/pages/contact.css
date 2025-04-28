@@ -1,7 +1,7 @@
 
 .contact-page {
     min-height: 100vh;
-    background-image: url('/12.png');
+    background-image: url('/12.png');/* Imagen de fondo */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -23,7 +23,7 @@
     max-width: 1200px;
     align-items: center;
     justify-content: center;
-    background-color: rgba(238, 230, 230, 0.7); 
+    background-color: rgba(238, 230, 230, 0.7); /* Transparencia con el fondo */
     border-radius: 8px;
     padding: 2rem;
   }
