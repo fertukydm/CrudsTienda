@@ -1,0 +1,102 @@
+.home-container {
+    min-height: 100vh;
+    background-image: url('/frontend/public/19.png'); 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 2rem;
+  }
+  .crear-cuenta-container {
+    display: flex;
+    min-height: 100vh;
+    background-color: #f2f2f2;
+  }
+  
+  
+  .form-section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+  }
+  
+ 
+  .formulario {
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .input {
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+  }
+  
+  .boton {
+    background-color: black;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .boton:hover {
+    background-color: #333;
+  }
+  
+  .error {
+    color: red;
+    font-size: 13px;
+    margin-top: -10px;
+    margin-bottom: 10px;
+  }
+  
+  /* Link para iniciar sesión */
+  .link {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 14px;
+  }
+  
+  .link a {
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .link a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Sección derecha */
+  .image-section {
+    flex: 1;
+    background-image: url('./frontend/public/39');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+  }
+  
+  
+  .overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 20px 30px;
+    border-radius: 10px;
+  }
+  
+  .overlay h2 {
+    color: white;
+    font-size: 28px;
+    text-align: center;
+  }
