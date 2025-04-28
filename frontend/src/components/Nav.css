@@ -1,5 +1,4 @@
 
-/* Estilos generales */
 .navbar {
     background-color: #b2a48a;
     padding: 12px 20px;
@@ -21,7 +20,7 @@
     font-weight: bold;
     font-size: 20px;
     letter-spacing: 1px;
-    color: black;
+    color: rgb(255, 255, 255);
     text-align: center;
     flex: 1;
   }
@@ -75,14 +74,14 @@
     display: block; /* Mostrar el menú */
   }
   
-  /* Lista de menú */
+ 
   .menu-list {
     list-style: none;
     padding: 8px 16px;
     margin: 0;
   }
   
-  /* Elementos del menú */
+  
   .menu-item {
     padding: 12px 0;
     border-bottom: 1px solid #e2e2e2;
@@ -92,7 +91,7 @@
     border-bottom: none;
   }
   
-  /* Enlaces del menú */
+  
   .menu-link {
     text-decoration: none;
     color: #333;
@@ -117,7 +116,7 @@
     .menu-button-container {
       display: block;
     }
-  
+
     .menu-dropdown {
       display: none;
     }

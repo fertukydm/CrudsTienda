@@ -8,19 +8,19 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="navbar-container">
-        {/* Botón hamburguesa */}
+       
         <div className="menu-button-container">
           <button className="menu-button" onClick={() => setMenuOpen(!menuOpen)}>
             <img src="/29.png" alt="Menú" className="navbar-menu-icon" />
           </button>
         </div>
 
-        {/* Título/Logo */}
+        
         <div className="navbar-logo">
           OK RECORDS
         </div>
 
-        {/* Íconos a la derecha */}
+        
         <div className="navbar-icons">
           <button>
             <img src="/26.png" alt="Buscar" className="navbar-icon" />
@@ -34,7 +34,7 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Menú hamburguesa desplegable */}
+      
       {menuOpen && (
         <div className={`menu-dropdown ${menuOpen ? 'open' : ''}`}>
           <ul className="menu-list">
@@ -42,7 +42,11 @@ const Navbar = () => {
               <Link to="/crear-cuenta" className="menu-link" onClick={() => setMenuOpen(false)}>
                 Crear cuenta
               </Link>
-              
+            </li>
+            <li className="menu-item">
+              <Link to="/login" className="menu-link" onClick={() => setMenuOpen(false)}>
+                Login
+              </Link>
             </li>
             <li className="menu-item">
               <Link to="/" className="menu-link" onClick={() => setMenuOpen(false)}>

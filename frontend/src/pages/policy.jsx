@@ -3,6 +3,19 @@ import './Policy.css';
 const Politicas = () => {
   return (
     <div className="okrecords-container">
+      <div className="text-content">
+        <p>Bienvenid@ a OKRECORDS</p>
+        <p>
+          Ofrecemos una cuidada selección de vinilos, desde clásicos
+           atemporales hasta ediciones limitadas difíciles de encontrar, 
+           con un servicio personalizado que entiende lo que significa
+            tener un disco en las manos. Creamos experiencias que van más 
+            allá de la compra: eventos, recomendaciones expertas y una 
+            comunidad para los verdaderos amantes de la música.
+        </p>
+      </div>
+      <br/>
+
       <div className="center-image">
         <img
           src="../public/14.png"
