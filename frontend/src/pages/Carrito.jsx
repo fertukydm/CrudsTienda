@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Carrito.css';
 
 
@@ -20,7 +20,7 @@ function CarritoC() {
         format: 'LP',
         arrivalDate: 'Arrives by 25 feb - 3 mar',
         quantity: 1,
-        image: 'record2.jpg', 
+        image: '9.jpg', 
       },
       {
         id: 3,
@@ -29,7 +29,7 @@ function CarritoC() {
         format: 'LP',
         arrivalDate: 'Arrives by 25 feb - 3 mar',
         quantity: 1,
-        image: 'record3.jpg', 
+        image: '10.jpg', 
       },
     ]);
   
@@ -50,7 +50,9 @@ function CarritoC() {
     };
   
     return (
+      
       <div className="shopping-cart-container">
+        
         <div className="cart-items">
           <div className="cart-header">
             <h3>Producto</h3>

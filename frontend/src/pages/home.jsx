@@ -9,7 +9,7 @@ const Home = () => {
     <div className="background-image">
         <img src="/12.pn" alt="" />
       
-    <div className="home-container">
+    <div className="home-img">
       <div className="relative">
         
         <img

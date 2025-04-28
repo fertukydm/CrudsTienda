@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './ProcesodePago.css';
 
 const ProcesoPago = () => {
@@ -182,14 +182,14 @@ const ProcesoPago = () => {
           </form>
         </div>
   
-        <div className="image-section-pago">
+        <div className="image-pago1">
           <div className="overlay-pago">
             <h2>Proceso de Pago</h2>
             <p>Todas las transacciones son seguras y están encriptadas.</p>
             <img
-              src="/ruta-a-tu-imagen-de-pago.png"
+              src="./frontend/public/40.png"
               alt="Método de pago"
-              className="imagen-pago"
+              className="image-pago1"
             />
           </div>
         </div>

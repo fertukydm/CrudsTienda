@@ -21,7 +21,7 @@ const Login = () => {
   //Codigo de formulario de iniciar sesion
   return (
     <div className="ok-records-container">
-      <div className="login-section">
+      <div className="login-section"> 
         <div className="login-card">
           <div className="form-side">
             <form onSubmit={handleLogin}>
@@ -69,8 +69,8 @@ const Login = () => {
             </div>
           </div>
         </div>
-      </div>
       
+        </div>
     </div>
   );
 };

@@ -1,5 +1,7 @@
-import React from 'react';
-import './CreateAccount.css';
+
+import React, { useState } from 'react';
+import './CrearCuenta.css';
+
 const CrearCuenta = () => {
   const [formData, setFormData] = useState({
     nombre: "",

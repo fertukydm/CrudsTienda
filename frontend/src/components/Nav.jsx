@@ -5,7 +5,7 @@ import './Nav.css';
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
-  /* Menu de navegacion por iconos que aun no esta conetado y menu hambuerguesa */
+  /* Menu de navegacion por iconos que aun no esta conetado y menu hambuergue */
 
   return (
     <nav className="navbar">
@@ -70,6 +70,16 @@ const Navbar = () => {
               <Link to="/mi-cuenta" className="menu-link" onClick={() => setMenuOpen(false)}>
                 Mi cuenta
               </Link>
+              <li className="menu-item">
+              <Link to="/carrito" className="menu-link" onClick={() => setMenuOpen(false)}>
+                Carrito
+              </Link>
+            </li>
+            <li className="menu-item">
+              <Link to="/ProcesodePago" className="menu-link" onClick={() => setMenuOpen(false)}>
+                Proceso de Pago
+              </Link>
+            </li>
             </li>
           </ul>
         </div>
