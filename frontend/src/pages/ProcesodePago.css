@@ -1,0 +1,99 @@
+.home-container {
+    min-height: 100vh;
+    background-image: url('/frontend/public/19.png'); 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 2rem;
+  }
+
+.proceso-pago-container {
+    display: flex;
+    min-height: 100vh;
+    background-color: #f2f2f2;
+  }
+  
+  .form-section-pago {
+    flex: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+  }
+  
+  .formulario-pago {
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .input-pago {
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+  }
+  
+  .nombre-apellidos {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .direccion-extra {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  
+  .checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+  }
+  
+  .radio-group {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 15px;
+  }
+  
+  .boton-pago {
+    background-color: black;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .boton-pago:hover {
+    background-color: #333;
+  }
+  
+  /* Sección derecha */
+  .image-section-pago {
+    flex: 1;
+    background-image: url('/ruta-a-tu-fondo-imagen.jpg');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    padding: 20px;
+  }
+  
+  .overlay-pago {
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 15px;
+    padding: 20px;
+    color: white;
+    text-align: center;
+  }
+  
+  .imagen-pago {
+    margin-top: 20px;
+    width: 100%;
+    max-width: 300px;
+  }
