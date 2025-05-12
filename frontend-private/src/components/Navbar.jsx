@@ -58,16 +58,6 @@ const Navbar = () => {
                 Metodo de pago
               </Link>
             </li>
-            <li className="menu-item">
-              <Link to="" className="menu-link" onClick={() => setMenuOpen(false)}>
-                Perfil
-              </Link>
-            </li>
-            <li className="menu-item">
-              <Link to="" className="menu-link" onClick={() => setMenuOpen(false)}>
-                Cerrar sesión
-              </Link>
-            </li>
           </ul>
         </div>
       )}

@@ -6,19 +6,19 @@ const albums = [
     title: 'i love you',
     artist: 'The neighbourhood',
     price: '$40.00',
-    img: '',
+    img: '/8.8.png',
   },
   {
     title: 'reputation',
     artist: 'Taylor Swift',
     price: '$97.00',
-    img: '',
+    img: '/45.45.png',
   },
   {
     title: 'orquídeas',
     artist: 'Kali Uchis',
     price: '$59.00',
-    img: '',
+    img: '/9.9.png',
   },
   {
     title: 'after hours',
@@ -33,7 +33,7 @@ const albums = [
     img: '',
   },
   {
-    title: 'dangerous women',
+    title: 'dangerous woman',
     artist: 'ariana grande',
     price: '$50.00',
     img: '',
@@ -57,7 +57,7 @@ const Carrito = () => {
     <div className="music-store">
       <div className="banner">
         <img
-          src=""
+          src="/26.26.png"
           alt="Banner"
         />
         <button className="btn-add">Agregar productos</button>
