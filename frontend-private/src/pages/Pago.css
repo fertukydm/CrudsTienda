@@ -1,0 +1,287 @@
+body {
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+  background: url('17.17.png') no-repeat center center fixed;
+  background-size: cover;
+}
+
+.formulario-pago {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.contenedor {
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 900px;
+}
+
+.formulario {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.grupo-input, .grupo-checkbox, .grupo-entrega, .grupo-radio, .grupo-select, .grupo-nombre, .grupo-direccion, .grupo-ciudad, .grupo-telefono {
+  margin-bottom: 20px;
+}
+
+label {
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+input[type="email"], input[type="text"], select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  color: black;
+  font-size: 12px;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+button:hover {
+  text-decoration: none;
+}
+
+.grupo-checkbox input, .grupo-radio input {
+  width: 18px;
+  height: 18px;
+  margin-right: 10px;
+}
+
+.eliminar {
+  color: red;
+  cursor: pointer;
+}
+
+.grupo-radio {
+  display: flex;
+  align-items: center;
+}
+
+.grupo-radio img {
+  width: 20px;
+  height: 20px;
+  margin-left: 10px;
+}
+
+.grupo-ciudad .campo-con-x {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.grupo-ciudad input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.grupo-ciudad span {
+  color: red;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.resumen {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.resumen img {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.texto-resumen .titulo {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.texto-resumen .descripcion {
+  font-size: 12px;
+}
+
+.metodo-pago {
+  margin-top: 20px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  background-color: white;
+  border-radius: 5px;
+}
+
+.bancos {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bancos span {
+  font-size: 14px;
+}
+
+.visa {
+  color: blue;
+  font-weight: bold;
+}
+
+.mastercard {
+  color: red;
+  font-weight: bold;
+}
+
+.cuadro-tarjeta {
+  width: 80px;
+  height: 40px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.descripcion {
+  font-size: 10px;
+  margin-top: 10px;
+}
+
+.descripcion p {
+  margin: 5px 0;
+}
+
+/* Responsividad para dispositivos grandes */
+@media (max-width: 768px) {
+  .contenedor {
+    max-width: 95%;
+    padding: 15px;
+  }
+
+  .formulario {
+    gap: 10px;
+  }
+
+  .grupo-nombre, .grupo-ciudad, .grupo-telefono {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .grupo-nombre input {
+    margin-bottom: 10px;
+  }
+
+  .grupo-ciudad .campo-con-x {
+    margin-bottom: 10px;
+  }
+
+  .resumen {
+    margin-top: 15px;
+  }
+
+  .resumen img {
+    max-width: 100%;
+  }
+
+  .metodo-pago {
+    padding: 15px;
+  }
+
+  .bancos {
+    flex-direction: column;
+    gap: 5px;
+  }
+}
+
+/* Responsividad para dispositivos pequeños */
+@media (max-width: 480px) {
+  .contenedor {
+    max-width: 100%;
+    padding: 10px;
+  }
+
+  .formulario {
+    gap: 8px;
+  }
+
+  label {
+    font-size: 12px;
+  }
+
+  input[type="email"], input[type="text"], select {
+    font-size: 14px;
+  }
+
+  button {
+    font-size: 10px;
+  }
+
+  .eliminar {
+    font-size: 12px;
+  }
+
+  .resumen {
+    margin-top: 10px;
+  }
+
+  .metodo-pago {
+    padding: 10px;
+  }
+
+  .bancos {
+    flex-direction: column;
+  }
+}
+
+.formulario-pago {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; 
+  height: calc(100vh - 60px); 
+  padding-top: 60px; 
+}
+
+
+.contenedor {
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 900px;
+  margin-top: 0; 
+}
+
+
+
+@media (max-width: 768px) {
+  .formulario-pago {
+    height: calc(100vh - 60px); 
+    padding-top: 60px; 
+  }
+}
+
+@media (max-width: 480px) {
+  .formulario-pago {
+    height: calc(100vh - 50px); 
+    padding-top: 50px;
+  }
+}
+
