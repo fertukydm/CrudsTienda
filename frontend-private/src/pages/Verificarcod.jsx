@@ -30,9 +30,9 @@ const Verificarcodd = () => {
         {/* Imagen */}
         <div className="verify-image-container">
           <img
-            src="/ruta-a-tu-imagen.jpg"
+            src="/frontend-private/public/18.18.png"
             alt="Código de recuperación"
-            className="verify-image"
+            className="verify-image" 
           />
         </div>
 

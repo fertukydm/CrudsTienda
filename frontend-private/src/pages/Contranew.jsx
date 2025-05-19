@@ -17,7 +17,7 @@ const Contranuevaa = () => {
         {/* Imagen */}
         <div className="password-image-container">
           <img
-            src="/ruta-a-tu-imagen.jpg"
+            src="/frontend-private/public/18.18.png"
             alt="Recuperación"
             className="password-image"
           />
