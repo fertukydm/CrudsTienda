@@ -16,11 +16,11 @@ const Recucontraa = () => {
     <div className="reset-container">
       <h1 className="reset-title">Restablecer contraseña de cuenta</h1>
 
-      <div className="reset-box">
+      <div className=".home-container">
         {/* Imagen */}
         <div className="reset-image-container">
           <img
-            src="/ruta-a-tu-imagen.jpg"
+            src="/frontend-private/public/18.18.png"
             alt="Recuperación"
             className="reset-image"
           />

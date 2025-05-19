@@ -1,3 +1,12 @@
+.home-container {
+  min-height: 100vh;
+  background-image: url('/frontend-private/public/18.18.png'); 
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 2rem;
+}
+
 .reset-container {
   min-height: 100vh;
   background-color: #f3f4f6;
