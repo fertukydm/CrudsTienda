@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './ProcesodePago.css';
 
 const ProcesoPago = () => {
+  
     const [formData, setFormData] = useState({
       email: "",
       nombre: "",
@@ -32,8 +33,14 @@ const ProcesoPago = () => {
     };
   
     return (
+      
+      
       <div className="proceso-pago-container">
+        
+        
         <div className="form-section-pago">
+          
+          
           <form onSubmit={handleSubmit} className="formulario-pago">
             <h2>Correo Electrónico</h2>
             <input
@@ -153,6 +160,9 @@ const ProcesoPago = () => {
                 <option value="San Salvador">San Salvador</option>
                 <option value="Santa Ana">Santa Ana</option>
                 <option value="La Libertad">La Libertad</option>
+                <option value="La Union">La Union</option>
+                <option value="Sonsonate">Sonsonate</option>
+                <option value="San Miguel">San Miguel</option>
               </select>
             </div>
   
@@ -184,13 +194,13 @@ const ProcesoPago = () => {
   
         <div className="image-pago1">
           <div className="overlay-pago">
-            <h2>Proceso de Pago</h2>
-            <p>Todas las transacciones son seguras y están encriptadas.</p>
-            <img
-              src="./frontend/public/40.png"
-              alt="Método de pago"
-              className="image-pago1"
-            />
+           <img
+  src="/11.png"
+  alt="Método de pago"
+  style={{ maxWidth: "100%", height: "auto", marginTop: "20px" }}
+/>
+<h2>PAGO</h2>
+ <p>Todas las transacciones son seguras y están encriptadas.</p>
           </div>
         </div>
       </div>
