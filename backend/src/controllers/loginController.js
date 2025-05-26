@@ -1,6 +1,6 @@
 // Creo un array de funciones
 const loginController = {};
-import loginmodels from "../models/login.js";
+import loginmodels from "../routes/Login.js";
 
 // SELECT
 loginController.getLogin = async (req, res) => {
@@ -10,8 +10,8 @@ loginController.getLogin = async (req, res) => {
 
 // INSERT
 loginController.insertLogin = async (req, res) => {
-  const { mail, code, password } = req.body;
-  const newLogin = new loginmodels({ mail, code, password });
+  const { mail, password } = req.body;
+  const newLogin = new loginmodels({ mail, password });
   await newLogin.save();
   res.json({ message: "Login saved" });
 };
@@ -24,10 +24,10 @@ loginController.deleteLogin = async (req, res) => {
 
 // UPDATE
 loginController.updateLogin = async (req, res) => {
-  const { mail, code, password } = req.body;
+  const { mail, password } = req.body;
   const updateLogin = await loginmodels.findByIdAndUpdate(
     req.params.id,
-    { mail, code, password },
+    { mail, password },
     { new: true }
   );
   res.json({ message: "login updated successfully" });

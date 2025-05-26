@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import Carrito from "./pages/Carrito";
 import Metododepago from "./pages/Pago";
 import Recuperar1 from "./pages/RecuContra";
+import Pago from "./pages/Pago";
 
 
 useEffect(() => {
@@ -25,6 +26,8 @@ function App() {
       <Route path="/carrito" element={<Carrito />} />
       <Route path="/metodop" element={<Metododepago />} />
       <Route path="/recuperar" element={<Recuperar1 />} />
+      <Route path="/Pago" element={<Pago />} />
+
 
     </Routes>
     </>

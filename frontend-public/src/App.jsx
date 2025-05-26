@@ -9,6 +9,11 @@ import Carrito from './pages/Carrito';
 import ProcesoPago from './pages/ProcesodePago';
 
 
+useEffect(() => {
+  fetch('http://localhost:3000/api/login')
+    .then(res => res.json())
+    .then(data => console.log(data));
+}, []);
 
 function App() {
   return (
