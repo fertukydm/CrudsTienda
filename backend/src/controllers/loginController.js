@@ -1,13 +1,13 @@
 // Creo un array de funciones
 const loginController = {};
 import loginmodels from "../routes/Login.js";
-
+ 
 // SELECT
 loginController.getLogin = async (req, res) => {
   const login = await loginmodels.find();
   res.json(login);
 };
-
+ 
 // INSERT
 loginController.insertLogin = async (req, res) => {
   const { mail, password } = req.body;
@@ -15,13 +15,13 @@ loginController.insertLogin = async (req, res) => {
   await newLogin.save();
   res.json({ message: "Login saved" });
 };
-
+ 
 // DELETE
 loginController.deleteLogin = async (req, res) => {
   await loginmodels.findByIdAndDelete(req.params.id);
   res.json({ message: "login deleted" });
 };
-
+ 
 // UPDATE
 loginController.updateLogin = async (req, res) => {
   const { mail, password } = req.body;
@@ -32,5 +32,5 @@ loginController.updateLogin = async (req, res) => {
   );
   res.json({ message: "login updated successfully" });
 };
-
+ 
 export default loginController;

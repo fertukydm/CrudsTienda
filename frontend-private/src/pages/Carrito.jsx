@@ -1,7 +1,9 @@
-import React from 'react';
-import './Carrito.css';
 
-const albums = [
+import React, { useState } from 'react';
+import './Carrito.css';
+import { Link } from "react-router-dom";
+
+const albumsData = [
   {
     title: 'i love you',
     artist: 'The neighbourhood',
@@ -53,14 +55,45 @@ const albums = [
 ];
 
 const Carrito = () => {
+  const [albums, setAlbums] = useState(albumsData);
+  const [editingAlbumIndex, setEditingAlbumIndex] = useState(null);
+  const [formData, setFormData] = useState({
+    title: '',
+    artist: '',
+    price: '',
+    img: '',
+  });
+
+  const openEditModal = (index) => {
+    setEditingAlbumIndex(index);
+    setFormData({ ...albums[index] });
+  };
+
+  const closeEditModal = () => {
+    setEditingAlbumIndex(null);
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleSave = () => {
+    setAlbums(prev => {
+      const updated = [...prev];
+      updated[editingAlbumIndex] = formData;
+      return updated;
+    });
+    closeEditModal();
+  };
+
   return (
     <div className="music-store">
       <div className="banner">
-        <img
-          src="/26.26.png"
-          alt="Banner"
-        />
-        <button className="btn-add">Agregar productos</button>
+        <img src="/26.26.png" alt="Banner" />
+        <Link to="/agregar-producto" className="btn-add">
+          Agregar productos
+        </Link>
       </div>
 
       <div className="store-layout">
@@ -96,12 +129,56 @@ const Carrito = () => {
               </div>
               <div className="card-text">{album.artist}</div>
               <div className="card-price">{album.price}</div>
-              <button className="btn-small">Editar</button>
+              <button className="btn-small" onClick={() => openEditModal(i)}>Editar</button>
               <button className="btn-small">Elegir este producto</button>
             </div>
           ))}
         </main>
       </div>
+
+      {/* Modal para editar */}
+      {editingAlbumIndex !== null && (
+        <div className="modal-overlay-edit">
+          <div className="modal-edit-card">
+            <h2>Editar Producto</h2>
+
+            <label>
+          
+              <input
+                type="text"
+                name="title"
+                value={formData.title}
+                onChange={handleChange}
+              />
+            </label>
+
+            <label>
+       
+              <input
+                type="text"
+                name="artist"
+                value={formData.artist}
+                onChange={handleChange}
+              />
+            </label>
+
+            <label>
+    
+              <input
+                type="text"
+                name="price"
+                value={formData.price}
+                onChange={handleChange}
+              />
+            </label>
+
+            <div className="modal-buttons-edit">
+              <button className="btn-save" onClick={handleSave}>Guardar</button>
+              <button className="btn-cancel" onClick={closeEditModal}>Cancelar</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

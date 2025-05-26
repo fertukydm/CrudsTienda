@@ -55,7 +55,7 @@ function CarritoC() {
         
         <div className="cart-items">
           <div className="cart-header">
-            
+
             <h3>Producto</h3>
             <h3>Cantidad</h3>
             <h3>Total</h3>

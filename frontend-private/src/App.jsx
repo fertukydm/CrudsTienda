@@ -1,3 +1,4 @@
+
 import { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
@@ -8,12 +9,16 @@ import Metododepago from "./pages/Pago";
 import Recuperar1 from "./pages/RecuContra";
 import Pago from "./pages/Pago";
 
-
 useEffect(() => {
   fetch('http://localhost:3000/api/login')
     .then(res => res.json())
     .then(data => console.log(data));
 }, []);
+
+import Productos from "./pages/Producto"
+
+
+
 
 
 function App() {
@@ -27,13 +32,14 @@ function App() {
       <Route path="/metodop" element={<Metododepago />} />
       <Route path="/recuperar" element={<Recuperar1 />} />
       <Route path="/Pago" element={<Pago />} />
-
+      <Route path="/agregar-producto" element={<Productos/>} />
+      
+     
 
     </Routes>
     </>
    
   );
-  
 }
 
 export default App;

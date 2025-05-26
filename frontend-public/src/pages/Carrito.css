@@ -1,6 +1,6 @@
 .home-container {
-    min-height: 100vh;
-    background-image: url('/22.png'); 
+    min-height: 100vh; 
+    background-image: url('/frontend/public/22.png'); 
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
