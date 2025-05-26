@@ -26,9 +26,13 @@ const productSchema = new Schema(
         require: true,
     },
     price: {
-        type:  Double ,
+        type:  Number ,
         require: true,
-    }
+    },  
+    imageUrl: {
+      type: String, 
+      required: false, 
+    },
     
   },
   {

@@ -1,5 +1,5 @@
 const promotionsController = {};
-import promotions from "../models/promotions";
+import promotions from "../models/promotions.js";
 import promotionsController from "../models/promotions";
 
 
