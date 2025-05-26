@@ -1,17 +1,11 @@
-import express from "express";
-import loginController from "../controllers/loginController.js";
-import loginController from "../controllers/loginController.js";
+import express from 'express';
+import loginController from '../controllers/loginController.js';
 
 const router = express.Router();
 
-router
-  .route("/")
-  .get(loginController.getLogin)
-  .post(loginController.insertLogin);
-
-router
-  .route("/:id")
-  .put(loginController.updateLogin)
-  .delete(loginController.deleteLogin);
+router.get('/', loginController.getLogin);
+router.post('/', loginController.insertLogin);
+router.delete('/:id', loginController.deleteLogin);
+router.put('/:id', loginController.updateLogin);
 
 export default router;
