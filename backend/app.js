@@ -9,7 +9,7 @@ app.use(cors()); // permite que el frontend se conecte
 app.use(express.json()); // para leer JSON en req.body
 
 // Conectar a MongoDB
-mongoose.connect('mongodb://localhost:27017/nombre_de_tu_db', {
+mongoose.connect('mongodb://localhost:27017/mongodb+srv://sofiaguillen2201:HMpccuUX6CqxrR00@cluster0.xtxj9.mongodb.net/', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
