@@ -7,8 +7,6 @@ const Login = () => {
   const [error, setError] = useState('');  // Estado para manejar errores
   const [loading, setLoading] = useState(false); // Para manejar el estado de carga
 
-  const [subscribeEmail, setSubscribeEmail] = useState('');
-
 
  //Logica para login 
  const handleLogin = async (e) => {
@@ -28,10 +26,6 @@ const Login = () => {
       }),
     });
 
-  const handleSubscribe = (e) => {
-    e.preventDefault();
-    console.log('Subscribe with email:', subscribeEmail);
-  };
   const data = await response.json();
 
   if (response.ok) {
