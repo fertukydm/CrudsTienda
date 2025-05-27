@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import "./Producto.css"
+import "./Producto.css";
 
 const AgregarProducto = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
@@ -13,7 +13,7 @@ const AgregarProducto = () => {
     console.log(data);
 
     // Aquí puedes enviar los datos al backend si lo deseas
-    // await fetch('http://localhost:4000/api/Products', { method: 'POST', body: data });
+    await fetch('http://localhost:4000/api/Products', { method: 'POST', body: data });
 
     // Después de guardar el producto, redirigir a la pantalla del carrito
     navigate("/carrito");

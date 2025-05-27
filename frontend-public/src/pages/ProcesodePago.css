@@ -1,10 +1,9 @@
 .home-container1 {
     min-height: 100vh;
-<<<<<<< HEAD
+
     background-image: url('/39.png');
-=======
     background-image: url('/frontend/public/11.png'); 
->>>>>>> b55e80c (Aregglos)
+
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -14,10 +13,9 @@
 .proceso-pago-container {
     display: flex;
     min-height: 100vh;
-<<<<<<< HEAD
+
     
-=======
->>>>>>> b55e80c (Aregglos)
+
     background-color: #f2f2f2;
   }
   
@@ -27,10 +25,7 @@
     justify-content: center;
     align-items: center;
     padding: 40px;
-<<<<<<< HEAD
-    
-=======
->>>>>>> b55e80c (Aregglos)
+
   }
   
   .formulario-pago {
@@ -45,10 +40,7 @@
     margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 6px;
-<<<<<<< HEAD
-    
-=======
->>>>>>> b55e80c (Aregglos)
+
   }
   
   .nombre-apellidos {
@@ -93,11 +85,7 @@
   /* Sección derecha */
   .image-pago1 {
     flex: 1;
-<<<<<<< HEAD
-    
-=======
     background-image: url('/frontend/public/11.png');
->>>>>>> b55e80c (Aregglos)
     background-size: cover;
     background-position: center;
     position: relative;
@@ -105,16 +93,11 @@
   }
   
   .overlay-pago {
-<<<<<<< HEAD
   background-color: rgba(0, 0, 0, 0.4); /* más oscuro pero transparente */
   border-radius: 15px;
   padding: 20px;
   color: white;
   text-align: center;
-  
-}
-
-=======
     background-color: rgba(177, 177, 177, 0.6);
     border-radius: 15px;
     padding: 20px;
@@ -123,15 +106,11 @@
     
   }
   
->>>>>>> b55e80c (Aregglos)
+
   .imagen-pago11 {
     margin-top: 20px;
     width: 100%;
     max-width: 300px;
-<<<<<<< HEAD
   background-image: url('/11.png'); 
-
-=======
->>>>>>> b55e80c (Aregglos)
     
   }
