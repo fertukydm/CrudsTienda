@@ -1,7 +1,8 @@
 import express from "express";
 import cors from "cors";
-import loginRoutes from "./routes/login.js";
+import loginRoutes from "./src/routes/Login.js";
 import dotenv from "dotenv";
+import registerRoutes from "./src/routes/registerEmployee.js"
 
 dotenv.config();
 
@@ -21,6 +22,7 @@ app.use(express.json());
 
 // Rutas
 app.use("/api/login", loginRoutes);
+app.use("/api/registerEmployee", registerRoutes);
 
 
 const PORT = process.env.PORT || 4000;

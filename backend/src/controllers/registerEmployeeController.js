@@ -6,6 +6,8 @@ import { config } from "../config.js";
 const registerEmployeesController = {};
 
 registerEmployeesController.register = async (req, res) => {
+  console.log("POST /api/registerEmployee - body:", req.body);
+  
   const { name, lastName, birthday, email, address, password } = req.body;
 
   try {
