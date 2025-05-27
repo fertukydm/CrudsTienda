@@ -8,33 +8,37 @@ import Metododepago from "./pages/Pago";
 import Recuperar1 from "./pages/RecuContra";
 import Pago from "./pages/Pago";
 import Productos from "./pages/Producto";
+import { AuthProvider } from './context/AuthContext';
+import PrivateRoute from './components/PrivateRoute';
 
 function App() {
   useEffect(() => {
-  fetch('http://localhost:3000/api/login')
+  fetch('http://localhost:4000/api/login')
     .then(res => res.json())
     .then(data => console.log(data));
 }, []);
-  return (
-    <>
-    <Navbar/>
-     <Routes>
-      <Route path="" element={<Home />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/carrito" element={<Carrito />} />
-      <Route path="/metodop" element={<Metododepago />} />
-      <Route path="/recuperar" element={<Recuperar1 />} />
-      <Route path="/Pago" element={<Pago />} />
-      <Route path="/agregar-producto" element={<Productos/>} />
-      
-     
 
-    </Routes>
-    
-    </>
-    
-   
-  );
-}
+  return (
+      <AuthProvider>
+        <>
+          <Navbar />
+          <Routes>
+            {/* Públicas */}
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/recuperar" element={<Recuperar1 />} />
+  
+            {/* Protegidas */}
+            <Route element={<PrivateRoute />}>
+              <Route path="/carrito" element={<Carrito />} />
+              <Route path="/pago" element={<Pago />} />
+              <Route path="/metodop" element={<Metododepago />} />
+              <Route path="/agregar-producto" element={<Productos />} />
+            </Route>
+          </Routes>
+        </>
+      </AuthProvider>
+    );
+  }
 
 export default App;

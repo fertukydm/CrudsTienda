@@ -1,25 +1,31 @@
-import express from 'express';
-import mongoose from 'mongoose';
-import cors from 'cors';
-import loginRoutes from './routes/loginRoutes.js';
+import express from "express";
+import cors from "cors";
+import loginRoutes from "./routes/login.js";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const app = express();
 
-app.use(cors());
+// Configura CORS solo UNA vez, así evitas conflictos
+app.use(
+  cors({
+    origin: process.env.FRONTEND_URL,
+    credentials: true,
+  })
+);
+
+
+// Middleware para parsear JSON
 app.use(express.json());
 
-// Conexión a MongoDB Atlas
-mongoose.connect('mongodb://localhost:27017/CrudsTienda', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+// Rutas
+app.use("/api/login", loginRoutes);
 
-// Usar rutas
-app.use('/api/login', loginRoutes);
 
-// Servidor en puerto 3000
-app.listen(3000, () => {
-  console.log('Servidor corriendo en http://localhost:3000');
+const PORT = process.env.PORT || 4000;
+app.listen(PORT, () => {
+  console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });
 
 export default app;
