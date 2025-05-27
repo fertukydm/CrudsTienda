@@ -1,36 +1,56 @@
-// Creo un array de funciones
+import employeeModel from "../models/employee.js";
+import bcryptjs from "bcryptjs";
+import jsonwebtoken from "jsonwebtoken";
+import { config } from "../config.js";
+
 const loginController = {};
-import loginmodels from "../models/login.js";
- 
-// SELECT
-loginController.getLogin = async (req, res) => {
-  const login = await loginmodels.find();
-  res.json(login);
+
+loginController.login = async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    let userFound;
+    let userType;
+
+    // Opción 1: ADMIN (si tienes un admin hardcodeado en config)
+    if (
+      email === config.emailAdmin.email &&
+      password === config.emailAdmin.password
+    ) {
+      userType = "admin";
+      userFound = { _id: "admin" };
+    } else {
+      // Opción 2: EMPLEADO
+      userFound = await employeeModel.findOne({ email });
+      userType = "employee";
+
+      if (!userFound) {
+        return res.status(404).json({ message: "Usuario no encontrado" });
+      }
+
+      // Comparar contraseñas
+      const isMatch = await bcryptjs.compare(password, userFound.password);
+      if (!isMatch) {
+        return res.status(401).json({ message: "Contraseña incorrecta" });
+      }
+    }
+
+    // Generar token
+    jsonwebtoken.sign(
+      { id: userFound._id, userType },
+      config.JWT.secret,
+      { expiresIn: config.JWT.expiresIn },
+      (error, token) => {
+        if (error) return res.status(500).json({ message: "Error al generar el token" });
+
+        res.cookie("authToken", token);
+        res.json({ message: "Login exitoso", token });
+      }
+    );
+  } catch (error) {
+    console.error("Error en login:", error);
+    res.status(500).json({ message: "Error interno del servidor" });
+  }
 };
- 
-// INSERT
-loginController.insertLogin = async (req, res) => {
-  const { mail, password } = req.body;
-  const newLogin = new loginmodels({ mail, password });
-  await newLogin.save();
-  res.json({ message: "Login saved" });
-};
- 
-// DELETE
-loginController.deleteLogin = async (req, res) => {
-  await loginmodels.findByIdAndDelete(req.params.id);
-  res.json({ message: "login deleted" });
-};
- 
-// UPDATE
-loginController.updateLogin = async (req, res) => {
-  const { mail, password } = req.body;
-  const updateLogin = await loginmodels.findByIdAndUpdate(
-    req.params.id,
-    { mail, password },
-    { new: true }
-  );
-  res.json({ message: "login updated successfully" });
-};
- 
+
 export default loginController;
