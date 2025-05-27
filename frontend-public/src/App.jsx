@@ -8,14 +8,13 @@ import CrearCuenta from './pages/CrearCuenta';
 import Carrito from './pages/Carrito';
 import ProcesoPago from './pages/ProcesodePago';
 
-
-useEffect(() => {
+function App() {
+  useEffect(() => {
   fetch('http://localhost:3000/api/login')
     .then(res => res.json())
     .then(data => console.log(data));
 }, []);
 
-function App() {
   return (
     <>
       <Nav /> 
@@ -29,7 +28,7 @@ function App() {
         <Route path="/Carrito" element={<Carrito/>} />
       </Routes>
     </>
-  );cd
+  );
 }
 
 export default App;

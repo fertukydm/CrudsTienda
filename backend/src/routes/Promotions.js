@@ -1,5 +1,4 @@
 import express from "express";
-import articleController from "../controllers/promotionsController";
 import promotionsController from "../controllers/promotionsController";
  
 const router = express.Router();

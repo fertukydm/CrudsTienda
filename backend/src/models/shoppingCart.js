@@ -34,4 +34,4 @@ const shoppingCartSchema = new Schema(
   }
 );
 
-export default model("ShoppingCart", shoppingCartSchema);
+export default model("shoppingCart", shoppingCartSchema);

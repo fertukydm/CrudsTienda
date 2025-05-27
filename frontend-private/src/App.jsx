@@ -1,4 +1,3 @@
-
 import { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
@@ -8,20 +7,14 @@ import Carrito from "./pages/Carrito";
 import Metododepago from "./pages/Pago";
 import Recuperar1 from "./pages/RecuContra";
 import Pago from "./pages/Pago";
+import Productos from "./pages/Producto";
 
-useEffect(() => {
+function App() {
+  useEffect(() => {
   fetch('http://localhost:3000/api/login')
     .then(res => res.json())
     .then(data => console.log(data));
 }, []);
-
-import Productos from "./pages/Producto"
-
-
-
-
-
-function App() {
   return (
     <>
     <Navbar/>
@@ -37,7 +30,9 @@ function App() {
      
 
     </Routes>
+    
     </>
+    
    
   );
 }

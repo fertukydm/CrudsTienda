@@ -6,10 +6,6 @@ const loginSchema = new Schema(
       type: String,
       require: true,
     },
-    code:{
-        type: String,
-        require: true,
-     },
      password:{
         type: String,
         require: true
@@ -21,4 +17,4 @@ const loginSchema = new Schema(
   }
 );
 
-export default model("Login", loginSchema);
+export default model("login", loginSchema);

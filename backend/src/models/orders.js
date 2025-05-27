@@ -27,7 +27,7 @@ const ordersSchema = new Schema(
         require: true,
     },
     phone: {
-        type:  Int ,
+        type:  String ,
         require: true,
     }
     ,
@@ -37,7 +37,7 @@ const ordersSchema = new Schema(
     }
     ,
     price: {
-        type:  Double ,
+        type:  Number ,
         require: true,
     }
     ,
@@ -47,7 +47,7 @@ const ordersSchema = new Schema(
     }
     ,
     total: {
-        type:  Double ,
+        type:  Number ,
         require: true,
     }
     
@@ -57,7 +57,7 @@ const ordersSchema = new Schema(
     strict: false,
   }
 );
-export default model("Orders", ordersSchema);
+export default model("orders", ordersSchema);
 
 
 

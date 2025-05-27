@@ -26,31 +26,31 @@ const albumsData = [
     title: 'after hours',
     artist: 'The weeknd',
     price: '$62.00',
-    img: '',
+    img: '/10.10.png',
   },
   {
     title: 'cinema',
     artist: 'the marías',
     price: '$46.00',
-    img: '',
+    img: '/11.11.png',
   },
   {
     title: 'dangerous woman',
     artist: 'ariana grande',
     price: '$50.00',
-    img: '',
+    img: '/12.12.png',
   },
   {
     title: 'am',
     artist: 'arctic monkeys',
     price: '$47.00',
-    img: '',
+    img: '/13.13.png',
   },
   {
     title: 'sour',
     artist: 'olivia rodrigo',
     price: '$46.80',
-    img: '',
+    img: '/14.14.png',
   },
 ];
 

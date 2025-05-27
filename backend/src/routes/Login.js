@@ -8,4 +8,4 @@ router.post('/', loginController.insertLogin);
 router.delete('/:id', loginController.deleteLogin);
 router.put('/:id', loginController.updateLogin);
  
-export default router
+export default router;

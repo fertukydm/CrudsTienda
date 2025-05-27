@@ -9,7 +9,7 @@ payController.getPay = async (req, res) => {
  
 payController.insertPay = async (req, res) => {
   const { paymentMethod} = req.body;
-  const newPay = new payModel({ paymentMethod });
+  const newPay = new pay({ paymentMethod });
   await newPay.save();
   res.json({ message: "Pay saved" });
 };

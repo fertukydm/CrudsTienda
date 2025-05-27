@@ -11,15 +11,15 @@ const promotionsSchema = new Schema(
       type: String,
     },
     price: {
-        type: Double,
+        type: Number,
         require: true,
     },
     discount: {
-    type: Int,
+    type: String,
     require: true,
     },
     total: {
-        type:  Double ,
+        type:  Number ,
         require: true,
     }
     
@@ -29,4 +29,4 @@ const promotionsSchema = new Schema(
     strict: false,
   }
 );
-export default model("Promotions", promotionsSchema);
+export default model("promotions", promotionsSchema);

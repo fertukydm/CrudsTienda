@@ -1,6 +1,6 @@
 // Creo un array de funciones
 const loginController = {};
-import loginmodels from "../routes/Login.js";
+import loginmodels from "../models/login.js";
  
 // SELECT
 loginController.getLogin = async (req, res) => {

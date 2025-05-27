@@ -14,4 +14,4 @@ const payShema = new Schema(
   }
 );
 
-export default model("Article", payShema);
+export default model("pay", payShema);
