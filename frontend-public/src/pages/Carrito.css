@@ -1,6 +1,6 @@
 .home-container {
     min-height: 100vh; 
-    background-image: url('/frontend/public/22.png'); 
+    background-image: url('/22.png'); 
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -10,11 +10,12 @@
 .shopping-cart-container {
     background-color: #f8f8f8;
     padding: 20px;
+ background-image: url('/12.png'); 
     font-family: sans-serif;
     max-width: 960px;
     margin: 20px auto;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(252, 251, 251, 0.1);
     display: grid;
     grid-template-columns: 1fr;
     gap: 20px;

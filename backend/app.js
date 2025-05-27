@@ -2,24 +2,24 @@ import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import loginRoutes from './routes/loginRoutes.js';
- 
+
 const app = express();
- 
-app.use(cors()); // permite que el frontend se conecte
-app.use(express.json()); // para leer JSON en req.body
- 
-// Conectar a MongoDB
-mongoose.connect('mongodb+srv://sofiaguillen2201:HMpccuUX6CqxrR00@cluster0.xtxj9.mongodb.net/nombre-de-tu-bd', {
+
+app.use(cors());
+app.use(express.json());
+
+// Conexión a MongoDB Atlas
+mongoose.connect('mongodb://localhost:27017/CrudsTienda', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
 
- 
-// Usar las rutas
+// Usar rutas
 app.use('/api/login', loginRoutes);
- 
-app.listen(4000, () => {
-  console.log('Servidor corriendo en http://localhost:4000');
+
+// Servidor en puerto 3000
+app.listen(3000, () => {
+  console.log('Servidor corriendo en http://localhost:3000');
 });
- 
+
 export default app;

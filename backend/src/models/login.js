@@ -2,7 +2,7 @@ import { Schema, model } from "mongoose";
 
 const loginSchema = new Schema(
   {
-    mail: {
+    email: {
       type: String,
       require: true,
     },

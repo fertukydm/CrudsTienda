@@ -13,14 +13,16 @@ const Recucontraa = () => {
   };
 
   return (
+    
     <div className="reset-container">
+      
       <h1 className="reset-title">Restablecer contraseña de cuenta</h1>
 
       <div className=".home-container">
         {/* Imagen */}
         <div className="reset-image-container">
           <img
-            src="/frontend-private/public/18.18.png"
+            src="/18.18.png"
             alt="Recuperación"
             className="reset-image"
           />
@@ -38,7 +40,7 @@ const Recucontraa = () => {
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="ejemplo@dominio.com"
+            placeholder="ejemplo@gmail.com"
             className="reset-input"
           />
 

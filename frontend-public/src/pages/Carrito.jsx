@@ -11,7 +11,7 @@ function CarritoC() {
         format: 'LP',
         arrivalDate: 'Arrives by 25 feb - 3 mar',
         quantity: 1,
-        image: '30.jpg',
+        image: '/8.png',
       },
       {
         id: 2,
@@ -20,7 +20,7 @@ function CarritoC() {
         format: 'LP',
         arrivalDate: 'Arrives by 25 feb - 3 mar',
         quantity: 1,
-        image: '9.jpg', 
+        image: '9.png', 
       },
       {
         id: 3,
@@ -29,7 +29,7 @@ function CarritoC() {
         format: 'LP',
         arrivalDate: 'Arrives by 25 feb - 3 mar',
         quantity: 1,
-        image: '10.jpg', 
+        image: '10.png', 
       },
     ]);
   

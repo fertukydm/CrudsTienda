@@ -2,7 +2,7 @@
     min-height: 100vh;
 
     background-image: url('/39.png');
-    background-image: url('/frontend/public/11.png'); 
+    background-image: url('/12.png'); 
 
     background-size: cover;
     background-position: center;
@@ -12,6 +12,8 @@
 
 .proceso-pago-container {
     display: flex;
+        background-image: url('/12.png'); 
+
     min-height: 100vh;
 
     

@@ -102,7 +102,7 @@ const CrearCuenta = () => {
 
       <div className="image-section">
         <div className="overlay">
-          <h2>Crear Cuenta</h2>
+          
         </div>
       </div>
     </div>
