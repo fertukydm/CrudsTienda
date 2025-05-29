@@ -1,7 +1,15 @@
+import { config } from "./src/config.js";
 import app from "./app.js"; // Importa app desde app.js
+import "./database.js"
 
-const PORT = process.env.PORT || 5000;
+async function main() {
+  const port = config.PORT
+  app.listen(port)
+  console.log("server on port"+port)
+  
+}
 
-const server = app.listen(PORT, () => {
-  console.log(`Servidor corriendo en http://localhost:${PORT}`);
-});
+main()
+
+
+
