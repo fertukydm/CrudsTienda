@@ -6,6 +6,8 @@ import Contact from './pages/contact';
 import Policy from './pages/policy'; 
 import Login from "./pages/login";
 import CrearCuenta from './pages/CrearCuenta';
+import RegistrarEmpleado from './pages/RegistrarEmpleado';
+
 import Carrito from './pages/Carrito';
 import ProcesoPago from './pages/ProcesodePago';
 
@@ -26,6 +28,7 @@ function App() {
         <Route path="/login" element={<Login/>} />
         <Route path="/crear-cuenta" element={<CrearCuenta/>} />
         <Route path="/ProcesodePago" element={<ProcesoPago/>} />
+       <Route path="/RegistrarEmpleado" element={<RegistrarEmpleado />} />
         <Route path="/Carrito" element={<Carrito/>} />
       </Routes>
     </>

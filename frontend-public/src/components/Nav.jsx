@@ -75,6 +75,9 @@ const Navbar = () => {
                 Carrito
               </Link>
             </li>
+              <Link to="/RegistrarEmpleado" className="menu-link" onClick={() => setMenuOpen(false)}>
+               Registrar Empleado
+              </Link>
             <li className="menu-item">
               <Link to="/ProcesodePago" className="menu-link" onClick={() => setMenuOpen(false)}>
                 Proceso de Pago
