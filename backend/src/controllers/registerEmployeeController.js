@@ -3,6 +3,7 @@ import bcryptjs from "bcryptjs";
 import jsonwebtoken from "jsonwebtoken";
 import { config } from "../config.js";
 
+
 const registerEmployeesController = {};
 
 registerEmployeesController.register = async (req, res) => {

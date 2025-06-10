@@ -14,6 +14,7 @@ import ProcesoPago from './pages/ProcesodePago';
 function App() {
   useEffect(() => {
   fetch('http://localhost:3000/api/login')
+  fetch('http://localhost:3000/api/registerEmployee')
     .then(res => res.json())
     .then(data => console.log(data));
 }, []);

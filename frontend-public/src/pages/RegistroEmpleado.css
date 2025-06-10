@@ -2,12 +2,11 @@
   display: flex;
   min-height: 100vh;
   background-color: rgba(0, 0, 0, 0.05);
-    
 }
 
 .registro-image {
-   background-image: url('/23.png');
-    background-size: cover;
+  background-image: url('/23.png');
+  background-size: cover;
   background-position: center;
   min-height: 100vh;
   flex: 1;
@@ -19,7 +18,6 @@
 }
 
 .registro-image img {
- 
   width: 90%;
   height: auto;
   border-radius: 8px;
@@ -27,10 +25,9 @@
 }
 
 .registro-form {
-     background-image: url('/12.png');
-
+  background-image: url('/12.png');
   flex: 1;
-   background-size: cover;
+  background-size: cover;
   background-position: center;
   min-height: 100vh;
   background-color: #fff;
@@ -78,9 +75,16 @@
 .registro-form button:hover {
   background-color: #61461a;
 }
+
 .error {
   color: rgb(0, 0, 0);
   font-weight: bold;
   margin: 10px 0;
 }
 
+
+.registro-form button:disabled {
+  background-color: #332c17; 
+  cursor: not-allowed; 
+  color: #fffefe; 
+}
