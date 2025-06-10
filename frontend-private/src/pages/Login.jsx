@@ -1,50 +1,34 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Toaster, toast } from "react-hot-toast";
+import { useAuth } from "../context/AuthContext"; // Importar contexto de autenticación
 import "./Login.css";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  
-  // URL del API
-  const API = "http://localhost:4000/api/login"; 
+  const { Login } = useAuth(); // Usamos la función Login del contexto
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Validación de campos
+  
     if (!email || !password) {
       toast.error("Por favor, completa todos los campos.");
       return;
     }
-
-    try {
-      // Hacer la solicitud POST al servidor
-      const res = await fetch(API, {
-        method: "POST",
-        credentials: "include", // Enviar cookies para autenticación si se requiere
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      });
-
-      // Procesar la respuesta
-      const data = await res.json();
-
-      if (res.ok) {
-        toast.success(data.message || "Inicio de sesión exitoso.");
-        navigate("/"); // Redirige a la página principal o al dashboard
-      } else {
-        toast.error(data.message || "Credenciales incorrectas.");
-      }
-    } catch (error) {
-      toast.error("Error en la conexión con el servidor. :(");
-      console.error(error);
+  
+    const success = await Login(email, password); // Usar Login del contexto
+  
+    if (success) {
+      toast.success("¡Inicio de sesión exitoso! Bienvenido.");
+      console.log("Redirigiendo a Home...");
+      navigate("/"); 
+    } else {
+      toast.error("Credenciales incorrectas o error en el servidor.");
     }
   };
+  
 
   return (
     <div className="login-background">
@@ -90,6 +74,7 @@ const Login = () => {
         </form>
       </div>
     </div>
+    
   );
 };
 

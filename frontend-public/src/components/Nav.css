@@ -16,6 +16,23 @@
     margin: 0 auto;
   }
   
+  .cerrar-sesion {
+    font-weight: bold;
+    font-size: 18px;
+    color: #ffffff;
+    background-color: #000000;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    transition: background 0.3s ease;
+  }
+  
+  .cerrar-sesion:hover {
+    background-color: #ffffff;
+  }
+  
   .navbar-logo {
     font-weight: bold;
     font-size: 20px;

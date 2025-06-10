@@ -1,28 +1,17 @@
-import jsonwebtoken from "jsonwebtoken";
-import { config } from "../config.js";
+import express from "express";
+import dotenv from "dotenv";
+import loginController from "./controllers/loginController.js"; // Ajusta la ruta según corresponda
 
-export const validateAuthToken = (allowedUserTypes = []) => {
-  return (req, res, next) => {
-    try {
-      //1- Extraer el token de las cookies
-      const { authToken } = req.cookies;
+dotenv.config();
+const app = express();
 
-      //2- validar si existen las cookies
-      if (!authToken) {
-        return res.json({ message: "cookies not found, you must login" });
-      }
+// Middleware para parsear cuerpos JSON
+app.use(express.json());
 
-      //3-Extraemos la información del token
-      const decoded = jsonwebtoken.verify(authToken, config.JWT.secret);
+// Rutas
+app.post("/api/login", loginController.login);
 
-      //4- Verificar el tipo de usuario si puede ingresar o no
-      if (!allowedUserTypes.includes(decoded.userType)) {
-        return res.json({ message: "Access denied" });
-      }
-
-      next();
-    } catch (error) {
-        console.log("error"+error)
-    }
-  };
-};
+// Iniciar el servidor
+app.listen(process.env.PORT || 4001, () => {
+  console.log(`Server on port ${process.env.PORT || 4001}`);
+});

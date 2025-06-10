@@ -1,9 +1,11 @@
- import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import './Navbar.css';
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { useAuth } from "../context/AuthContext"; // ✅ Importar el contexto de autenticación
+import "./Navbar.css";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const { user, logOut } = useAuth(); 
 
   return (
     <nav className="navbar">
@@ -16,27 +18,19 @@ const Navbar = () => {
         </div>
 
         {/* Logo */}
-        <div className="navbar-logo">
-          OK RECORDS 
-        </div>
+        <div className="navbar-logo">OK RECORDS</div>
 
-        {/* Íconos */}
-        <div className="navbar-icons">
-          <button>
-            <img src="/31.31.png" alt="Buscar" className="navbar-icon" />
+        {/* Botón de Cerrar Sesión (solo si está autenticado) */}
+        {user && (
+          <button className="cerrar-sesion" onClick={logOut}>
+            Cerrar Sesión
           </button>
-          <button>
-            <img src="/33.33.png" alt="Carrito" className="navbar-icon" />
-          </button>
-          <button className="desktop-only">
-            <img src="/32.32.png" alt="Usuario" className="navbar-icon" />
-          </button>
-        </div>
+        )}
       </div>
 
       {/* Menú desplegable */}
       {menuOpen && (
-        <div className={`menu-dropdown ${menuOpen ? 'open' : ''}`}>
+        <div className={`menu-dropdown ${menuOpen ? "open" : ""}`}>
           <ul className="menu-list">
             <li className="menu-item">
               <Link to="/login" className="menu-link" onClick={() => setMenuOpen(false)}>
@@ -44,18 +38,18 @@ const Navbar = () => {
               </Link>
             </li>
             <li className="menu-item">
-              <Link to="" className="menu-link" onClick={() => setMenuOpen(false)}>
-               Home
+              <Link to="/" className="menu-link" onClick={() => setMenuOpen(false)}>
+                Home
               </Link>
             </li>
             <li className="menu-item">
               <Link to="/carrito" className="menu-link" onClick={() => setMenuOpen(false)}>
-                Carrito 
+                Carrito
               </Link>
             </li>
             <li className="menu-item">
               <Link to="/metodop" className="menu-link" onClick={() => setMenuOpen(false)}>
-                Metodo de pago
+                Método de pago
               </Link>
             </li>
           </ul>
@@ -66,3 +60,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+

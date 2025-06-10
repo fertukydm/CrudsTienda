@@ -13,7 +13,7 @@ import PrivateRoute from './components/PrivateRoute';
 
 function App() {
   useEffect(() => {
-  fetch('http://localhost:4000/api/login')
+  fetch('http://localhost:4001/api/login')
     .then(res => res.json())
     .then(data => console.log(data));
 }, []);
@@ -24,14 +24,16 @@ function App() {
           <Navbar />
           <Routes>
             {/* Públicas */}
-            <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/" element={<Home />} />
+           
             <Route path="/recuperar" element={<Recuperar1 />} />
-  
+           
             {/* Protegidas */}
             <Route element={<PrivateRoute />}>
-              <Route path="/carrito" element={<Carrito />} />
+
               <Route path="/pago" element={<Pago />} />
+              <Route path="/carrito" element={<Carrito />} />
               <Route path="/metodop" element={<Metododepago />} />
               <Route path="/agregar-producto" element={<Productos />} />
             </Route>

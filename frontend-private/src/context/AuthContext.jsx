@@ -1,42 +1,56 @@
-// context/AuthContext.js
-import React, { createContext, useContext, useState } from "react";
-
+import React from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 const AuthContext = createContext();
+import { toast } from "react-hot-toast";
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null); // Aquí puedes guardar info del usuario
-  
+  const [user, setUser] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const Login = async (email, password) => {
-    try {
-      const res = await fetch("http://localhost:3000/api/login", {
-        method: "POST",
-        credentials: "include", // Para enviar cookies si las usas
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
-      });
+  const Login = (email, password) => {
+    if (!email || !password) {
+      toast.error("Por favor, completa todos los campos.");
+      return false;
+    } else if (email == "admin@okrecords.com" && password == "admin_password_123") {
+      localStorage.setItem("user", JSON.stringify({ email }));
+      setUser(email);
+      setIsLoggedIn(true);
 
-      if (!res.ok) {
-        // Si status no es 200..299
-        return false;
-      }
-
-      const data = await res.json();
-      setUser(data.user || { email }); // Guarda datos básicos del usuario
+      toast.success("Inicio de sesión exitoso.");
       return true;
-    } catch (error) {
-      console.error("Login error:", error);
+    } else {
+      toast.error("Credenciales incorrectas. Por favor, intenta de nuevo.");
+      setIsLoggedIn(false);
       return false;
     }
   };
 
-  const Logout = () => {
-    setUser(null);
-    // Aquí podrías llamar a backend para cerrar sesión también
+  const logOut = () => {
+    try {
+      localStorage.removeItem("user");
+      setUser(null);
+      setIsLoggedIn(false);
+      toast.success("Sesión cerrada.");
+      return true;
+    } catch (error) {
+      console.error("Error al cerrar sesión:", error);
+      toast.error("Error al cerrar sesión.");
+      return false;
+    }
   };
 
+  // verifica si hay un usuario guardado en el localStorage al cargar la aplicación
+  useEffect(() => {
+    const savedUser = localStorage.getItem("user");
+    if (savedUser) {
+      setUser(JSON.parse(savedUser));
+    }
+  }, []);
+
   return (
-    <AuthContext.Provider value={{ user, Login, Logout }}>
+    <AuthContext.Provider
+      value={{ user, Login, logOut, isLoggedIn, setIsLoggedIn }}
+    >
       {children}
     </AuthContext.Provider>
   );

@@ -4,7 +4,7 @@ const employeeSchema = new Schema(
   {
     name: {
       type: String,
-      require: true,
+      required: true,
     },
 
     lastName: {
@@ -13,11 +13,12 @@ const employeeSchema = new Schema(
 
     birthday: {
       type: Date,
-      require: true,
+      required: true,
     },
 
     email: {
       type: String,
+      required: true,
     },
 
     address: {
@@ -26,7 +27,7 @@ const employeeSchema = new Schema(
 
     password: {
       type: String,
-      require: true,
+      required: true,
     }
   },
   {
