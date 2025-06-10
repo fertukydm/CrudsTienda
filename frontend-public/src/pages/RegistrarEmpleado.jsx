@@ -24,12 +24,9 @@ const RegistrarEmpleados = () => {
     setError('');
     setLoading(true); // Se activa el estado de carga
 
-    // --- IMPORTANTE: QUITA ESTE RETRASO O DÉJALO SOLO SI QUIERES SIMULAR UNA CARGA MUY LENTA ---
-    // Si tu API es muy rápida, este retraso (por ejemplo, 1000ms o 2000ms) te permitirá ver el cargador.
-    // Una vez que pruebes que funciona, puedes quitarlo para que la carga sea instantánea si la API lo es.
-    await new Promise(resolve => setTimeout(resolve, 1500)); // Retraso único para visibilidad (ej. 1.5 segundos)
-
     try {
+     
+
       const response = await fetch('http://localhost:3000/api/registerEmployee', {
         method: 'POST',
         headers: {
@@ -43,29 +40,23 @@ const RegistrarEmpleados = () => {
           address: formData.address,
           password: formData.password
         }),
-      });
-      console.log('Response:', response);
+      }); 
+
       const data = await response.json();
-      console.log('Response Data:', data);
 
       if (response.ok) {
         console.log('Empleado exitoso:', data);
         alert('¡Empleado registrado exitosamente!');
         // Limpiar el formulario después del registro exitoso
-        setFormData({
-          name: '',
-          lastName: '',
-          birthday: '',
-          email: '',
-          address: '',
-          password: '',
-        });
+
       } else {
+        // Muestra el mensaje de error del servidor o un genérico
         setError(data.message || 'Error al crear empleado');
       }
     } catch (error) {
+      // Captura errores de red o del servidor que impiden una respuesta JSON válida
       console.error('Error de conexión:', error);
-      setError('Error de red o del servidor');
+      setError('Error de red o del servidor.');
     } finally {
       setLoading(false); // Se desactiva el estado de carga
     }
