@@ -9,16 +9,34 @@ const AgregarProducto = () => {
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {
-    // Simulamos el proceso de guardar el producto
-    console.log(data);
-
-    // Aquí puedes enviar los datos al backend si lo deseas
-    await fetch('http://localhost:4000/api/Products', { method: 'POST', body: data });
-
-    // Después de guardar el producto, redirigir a la pantalla del carrito
-    navigate("/carrito");
+    try {
+      const response = await fetch('http://localhost:4001/api/products', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          authorName: data.authorName,
+          productName: data.name,  // Cambia `name` por `productName`
+          description: data.description,
+          price: parseFloat(data.price), // Asegurar que el precio es un número
+          imageUrl: imagePreview, // Enviar la imagen como URL
+        }),
+      });
+  
+      if (!response.ok) {
+        throw new Error('Error al agregar el producto');
+      }
+  
+      const newProduct = await response.json();
+      console.log('Producto guardado:', newProduct);
+  
+      navigate("/carrito");
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
-
+  
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {

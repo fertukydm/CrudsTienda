@@ -10,6 +10,11 @@ const Login = () => {
   const navigate = useNavigate();
   const { Login } = useAuth(); // Usamos la función Login del contexto
 
+  fetch("http://localhost:4001/api/login")
+  .then(res => res.text()) // Cambia `.json()` a `.text()` para ver si es HTML
+  .then(data => console.log(data));
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
   

@@ -1,22 +1,23 @@
-
 import mongoose from "mongoose";
-
 import { config } from "./src/config.js";
 
+const connectDB = async () => {
+  try {
+    await mongoose.connect(config.MONGO_URI);
+    console.log("✅ DB is connected");
+  } catch (error) {
+    console.error("❌ Error connecting to DB:", error);
+    process.exit(1); // Detiene el servidor si hay un error crítico
+  }
+};
 
-mongoose.connect(config.MONGO_URI);
-
-const connection = mongoose.connection;
-
-connection.once("open", () => {
-  console.log("DB is connected");
+// Eventos de conexión
+mongoose.connection.on("disconnected", () => {
+  console.log("🔴 DB is disconnected");
 });
 
-connection.on("disconnected", () => {
-  console.log("Db is disconnected");
+mongoose.connection.on("error", (error) => {
+  console.error("⚠️ Database error:", error);
 });
 
-// Veo si hay un error
-connection.on("error", (error) => {
-  console.log("error found" + error);
-});
+export default connectDB;

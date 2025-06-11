@@ -3,6 +3,7 @@ import cors from "cors";
 import loginRoutes from "./src/routes/Login.js";
 import dotenv from "dotenv";
 import registerRoutes from "./src/routes/registerEmployee.js"
+import productRoutes from "./src/routes/Product.js"
 
 dotenv.config();
 
@@ -21,7 +22,9 @@ app.use(express.json());
 
 // Rutas
 app.use("/api/login", loginRoutes);
+
 app.use("/api/registerEmployee", registerRoutes);
+app.use("/api/products", productRoutes);
 
 
 export default app;

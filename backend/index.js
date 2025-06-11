@@ -1,15 +1,21 @@
 import { config } from "./src/config.js";
-import app from "./app.js"; // Importa app desde app.js
-import "./database.js"
+import app from "./app.js";
+import connectDB from "./database.js";
 
 async function main() {
-  const port = config.PORT
-  app.listen(port)
-  console.log("server on port"+port)
-  
+  try {
+    await connectDB(); // Esperamos la conexión a la DB antes de iniciar el servidor
+    const port = config.PORT;
+    app.listen(port, () => {
+      console.log(`🌍 Server running on port ${port}`);
+    });
+  } catch (error) {
+    console.error("❌ Server startup failed:", error);
+    process.exit(1); // Detiene el servidor si hay un error crítico
+  }
 }
 
-main()
+main();
 
 
 
