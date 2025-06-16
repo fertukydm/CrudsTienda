@@ -10,12 +10,13 @@ dotenv.config();
 const app = express();
 
 // Configura CORS solo UNA vez, así evitas conflictos
-app.use(cors({
-  origin: 'http://localhost:5173',
-  methods: ['GET', 'POST'],
-  credentials: true,
-}));
+// Configurar CORS para permitir solicitudes desde el frontend en localhost:5173
+const corsOptions = {
+  origin: 'http://localhost:5173',  // Cambia esto a tu dominio si lo necesitas
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+};
 
+app.use(cors(corsOptions));
 
 // Middleware para parsear JSON
 app.use(express.json());

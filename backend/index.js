@@ -13,6 +13,8 @@ async function main() {
     console.error("❌ Server startup failed:", error);
     process.exit(1); // Detiene el servidor si hay un error crítico
   }
+
+  
 }
 
 main();

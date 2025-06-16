@@ -47,6 +47,8 @@ const Carrito = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  
+
   // Guardar cambios de un producto editado
   const handleSave = async () => {
     if (!albums[editingAlbumIndex]?._id) {
