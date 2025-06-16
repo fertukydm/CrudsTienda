@@ -33,6 +33,41 @@ const Login = () => {
       toast.error("Credenciales incorrectas o error en el servidor.");
     }
   };
+  const handleLogin = async (data) => {
+    try {
+      const response = await fetch('http://localhost:4001/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: data.email,
+          password: data.password,
+        }),
+      });
+  
+      if (!response.ok) {
+        throw new Error('Credenciales incorrectas');
+      }
+  
+      const result = await response.json();
+      const token = result.token;
+      const userType = result.userType;
+  
+      // Guardar el token en localStorage (o cookie) si es necesario
+      localStorage.setItem('token', token);
+  
+      // Redirigir dependiendo del tipo de usuario
+      if (userType === 'admin') {
+        navigate('/admin-dashboard');  // O la ruta para el administrador
+      } else {
+        navigate('/user-dashboard');   // O la ruta para los empleados
+      }
+    } catch (error) {
+      console.error('Error al iniciar sesión:', error);
+    }
+  };
+  
   
 
   return (
@@ -50,7 +85,7 @@ const Login = () => {
           </div>
         </div>
 
-        <form className="login-form" onSubmit={handleSubmit}>
+        <form className="login-form" onSubmit={handleLogin}>
           <label htmlFor="email">Correo Electrónico</label>
           <input
             type="email"

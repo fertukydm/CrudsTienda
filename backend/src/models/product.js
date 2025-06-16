@@ -3,8 +3,8 @@ import { Schema, model } from "mongoose";
 const productSchema = new Schema(
   {
     authorName: {
-      type: String,
-      required: true,
+      type: String, 
+      required: true 
     },
     productName: {
       type: String,

@@ -1,17 +1,16 @@
-import express from "express";
-import dotenv from "dotenv";
-import loginController from "./controllers/loginController.js"; // Ajusta la ruta según corresponda
+import jwt from 'jsonwebtoken';
 
-dotenv.config();
-const app = express();
+const authenticateToken = (req, res, next) => {
+  const token = req.header('Authorization')?.replace('Bearer ', '');
+  
+  if (!token) return res.status(401).json({ message: 'Access denied, token missing!' });
 
-// Middleware para parsear cuerpos JSON
-app.use(express.json());
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = decoded; // Puedes almacenar los datos del usuario decodificados si los necesitas
+    next();
+  } catch (err) {
+    return res.status(400).json({ message: 'Invalid token!' });
+  }
+};
 
-// Rutas
-app.post("/api/login", loginController.login);
-
-// Iniciar el servidor
-app.listen(process.env.PORT || 4001, () => {
-  console.log(`Server on port ${process.env.PORT || 4001}`);
-});

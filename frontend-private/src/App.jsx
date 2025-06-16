@@ -28,14 +28,16 @@ function App() {
             <Route path="/" element={<Home />} />
            
             <Route path="/recuperar" element={<Recuperar1 />} />
+            <Route path="/carrito" element={<Carrito />} />
+            <Route path="/agregar-producto" element={<Productos />} />
            
             {/* Protegidas */}
             <Route element={<PrivateRoute />}>
 
               <Route path="/pago" element={<Pago />} />
-              <Route path="/carrito" element={<Carrito />} />
+             
               <Route path="/metodop" element={<Metododepago />} />
-              <Route path="/agregar-producto" element={<Productos />} />
+             
             </Route>
           </Routes>
         </>

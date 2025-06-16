@@ -21,8 +21,8 @@ app.use(cors({
 app.use(express.json());
 
 // Rutas
-app.use("/api/login", loginRoutes);
 
+app.use("/api/login", loginRoutes);
 app.use("/api/registerEmployee", registerRoutes);
 app.use("/api/products", productRoutes);
 
