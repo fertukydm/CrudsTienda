@@ -10,6 +10,31 @@ import RegistrarEmpleado from './pages/RegistrarEmpleado';
 
 import Carrito from './pages/Carrito';
 import ProcesoPago from './pages/ProcesodePago';
+// Importar las dependencias
+const express = require('express');
+const cors = require('cors');
+const app = express();
+
+// Configuración de CORS
+app.use(cors({
+  origin: 'http://localhost:3000', // Solo permite solicitudes desde localhost:3000
+}));
+
+// Middleware para parsear JSON (si lo necesitas)
+app.use(express.json());
+
+// Rutas de la API
+app.post('/api/registerEmployee', (req, res) => {
+  // Tu lógica para registrar empleados
+});
+
+// Otros middlewares y rutas...
+
+// Iniciar el servidor
+app.listen(5000, () => {
+  console.log('Servidor corriendo en http://localhost:5000');
+});
+
 
 function App() {
   useEffect(() => {

@@ -22,45 +22,69 @@ const RegistrarEmpleados = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
-    setLoading(true); // Se activa el estado de carga
-
+  
+    // Validaciones básicas
+    const { name, lastName, birthday, email, address, password } = formData;
+  
+    if (!name.trim() || !lastName.trim() || !email.trim() || !password.trim()) {
+      setError('Por favor, completa todos los campos obligatorios.');
+      return;
+    }
+  
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setError('Correo electrónico no válido.');
+      return;
+    }
+  
+    if (password.length < 6) {
+      setError('La contraseña debe tener al menos 6 caracteres.');
+      return;
+    }
+  
+    const today = new Date().toISOString().split('T')[0];
+    if (birthday > today) {
+      setError('La fecha de nacimiento no puede ser en el futuro.');
+      return;
+    }
+  
+    setLoading(true);
+  
     try {
-     
-
       const response = await fetch('http://localhost:3000/api/registerEmployee', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          name: formData.name,
-          lastName: formData.lastName,
-          birthday: formData.birthday,
-          email: formData.email,
-          address: formData.address,
-          password: formData.password
-        }),
-      }); 
-
+        body: JSON.stringify(formData),
+      });
+  
       const data = await response.json();
-
+  
       if (response.ok) {
         console.log('Empleado exitoso:', data);
         alert('¡Empleado registrado exitosamente!');
-        // Limpiar el formulario después del registro exitoso
-
+  
+        // Limpiar formulario
+        setFormData({
+          name: '',
+          lastName: '',
+          birthday: '',
+          email: '',
+          address: '',
+          password: '',
+        });
       } else {
-        // Muestra el mensaje de error del servidor o un genérico
         setError(data.message || 'Error al crear empleado');
       }
     } catch (error) {
-      // Captura errores de red o del servidor que impiden una respuesta JSON válida
       console.error('Error de conexión:', error);
       setError('Error de red o del servidor.');
     } finally {
-      setLoading(false); // Se desactiva el estado de carga
+      setLoading(false);
     }
   };
+  
 
   return (
     <div className="registro-container">
