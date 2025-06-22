@@ -10,26 +10,8 @@ import Pago from "./pages/Pago";
 import Productos from "./pages/Producto";
 import { AuthProvider } from './context/AuthContext';
 import PrivateRoute from './components/PrivateRoute';
- const [cartItems, setCartItems] = useState([]);
-
-  const agregarAlCarrito = (producto) => {
-    setCartItems(prev => {
-      const existe = prev.find(item => item.id === producto.id);
-      if (existe) {
-        return prev.map(item =>
-          item.id === producto.id ? { ...item, cantidad: item.cantidad + 1 } : item
-        );
-      } else {
-        return [...prev, { ...producto, cantidad: 1 }];
-      }
-    });
-  };
-   return (
-    <div>
-      <Home agregarAlCarrito={agregarAlCarrito} />
-      <CarritoC cartItems={cartItems} setCartItems={setCartItems} />
-    </div>
-  );
+ 
+   
 
 function App() {
   useEffect(() => {
@@ -56,6 +38,7 @@ function App() {
             <Route element={<PrivateRoute />}>
 
               <Route path="/pago" element={<Pago />} />
+              
              
              
              

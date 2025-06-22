@@ -26,7 +26,7 @@ app.use(express.json());
 app.use("/api/login", loginRoutes);
 app.use("/api/registerEmployee", registerRoutes);
 app.use("/api/products", productRoutes);
-app.use("/api/pay", payRoutes);
+
 
 
 export default app;
