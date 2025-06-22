@@ -8,7 +8,7 @@
   }
 
 .shopping-cart-container {
-    background-color: #f8f8f8;
+    background-color: #000000;
     padding: 20px;
  background-image: url('/12.png'); 
     font-family: sans-serif;
@@ -109,7 +109,7 @@
   .item-total {
     text-align: right;
     font-weight: bold;
-    color: #fffdfd;
+    color: #000000;
   }
   
   .order-instructions h3 {

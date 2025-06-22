@@ -13,7 +13,7 @@ const shoppingCartSchema = new Schema(
 
     },
     price: {
-        type: Double,
+        type: String,
         require: true,
     },
 
@@ -23,7 +23,7 @@ const shoppingCartSchema = new Schema(
     },
 
     total: {
-        type:  Double ,
+        type:  String ,
         require: true,
     }
     

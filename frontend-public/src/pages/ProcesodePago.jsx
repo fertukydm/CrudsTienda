@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './ProcesodePago.css';
 
+
 const ProcesoPago = () => {
     const [formData, setFormData] = useState({
       email: "",

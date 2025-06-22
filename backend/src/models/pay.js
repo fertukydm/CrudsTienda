@@ -1,17 +1,10 @@
-
 import { Schema, model } from "mongoose";
 
-const payShema = new Schema(
-  {
-    paymentMethod: {
-      type: String,
-      require: true,
-    },
-     },
-  {
-    timestamps: true,
-    strict: false,
+const paySchema = new Schema({
+  paymentMethod: {
+    type: String,
+    required: true,
   }
-);
+});
 
-export default model("pay", payShema);
+export default model("pay", paySchema); 
