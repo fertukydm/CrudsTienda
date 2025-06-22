@@ -1,23 +1,19 @@
 import mongoose from "mongoose";
 import { config } from "./src/config.js";
 
-const connectDB = async () => {
+export default async function connectDB() {
   try {
-    await mongoose.connect(config.MONGO_URI);
-    console.log("✅ DB is connected");
+    await mongoose.connect(config.MONGO_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log("✅ Conectado a MongoDB correctamente");
+
+    mongoose.connection.once("open", () => {
+      console.log("📦 Conectado a la base de datos:", mongoose.connection.name);
+    });
   } catch (error) {
-    console.error("❌ Error connecting to DB:", error);
-    process.exit(1); // Detiene el servidor si hay un error crítico
+    console.error("❌ Error conectando a MongoDB:", error);
+    throw error;
   }
-};
-
-// Eventos de conexión
-mongoose.connection.on("disconnected", () => {
-  console.log("🔴 DB is disconnected");
-});
-
-mongoose.connection.on("error", (error) => {
-  console.error("⚠️ Database error:", error);
-});
-
-export default connectDB;
+}

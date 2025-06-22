@@ -40,8 +40,8 @@ registerEmployeesController.register = async (req, res) => {
     // Generar token JWT
     jsonwebtoken.sign(
       { id: newEmployee._id },
-      config.JWT.secret,
-      { expiresIn: config.JWT.expiresIn },
+      config.jwt.secret,
+      { expiresIn: config.jwt.expiresIn },
       (error, token) => {
         if (error) {
           console.error("Error al generar token:", error);

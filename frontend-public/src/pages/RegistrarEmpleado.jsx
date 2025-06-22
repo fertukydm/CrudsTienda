@@ -26,7 +26,7 @@ const RegistrarEmpleados = () => {
     // Validaciones básicas
     const { name, lastName, birthday, email, address, password } = formData;
   
-    if (!name.trim() || !lastName.trim() || !email.trim() || !password.trim()) {
+    if (!name.trim() || !lastName.trim() || !email.trim() ||!address.trim() || !password.trim()) {
       setError('Por favor, completa todos los campos obligatorios.');
       return;
     }
@@ -51,7 +51,7 @@ const RegistrarEmpleados = () => {
     setLoading(true);
   
     try {
-      const response = await fetch('http://localhost:3000/api/registerEmployee', {
+      const response = await fetch('http://localhost:4001/api/registerEmployee', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
