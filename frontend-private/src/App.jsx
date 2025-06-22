@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Login from "./pages/Login"; 
@@ -11,14 +11,12 @@ import Productos from "./pages/Producto";
 import { AuthProvider } from './context/AuthContext';
 import PrivateRoute from './components/PrivateRoute';
  
-   
-
 function App() {
   useEffect(() => {
-  fetch('http://localhost:4001/api/login')
-    .then(res => res.json())
-    .then(data => console.log(data));
-}, []);
+    fetch('http://localhost:4001/api/login')
+      .then(res => res.json())
+      .then(data => console.log(data));
+  }, []);
 
   return (
       <AuthProvider>
@@ -38,7 +36,6 @@ function App() {
             <Route element={<PrivateRoute />}>
 
               <Route path="/pago" element={<Pago />} />
-              
              
              
              

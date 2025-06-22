@@ -1,4 +1,4 @@
-import './Policy.css';
+import './policy.css';
 
 const Politicas = () => {
 

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./home.css";
+import "./Home.css";
 
 const Home = ({ agregarAlCarrito }) => {
   const [searchTerm, setSearchTerm] = useState("");

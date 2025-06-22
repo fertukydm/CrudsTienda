@@ -3,10 +3,7 @@ import { config } from "./src/config.js";
 
 export default async function connectDB() {
   try {
-    await mongoose.connect(config.MONGO_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    await mongoose.connect(config.MONGO_URI); // 👈 Limpio y actualizado
     console.log("✅ Conectado a MongoDB correctamente");
 
     mongoose.connection.once("open", () => {
