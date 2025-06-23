@@ -1,88 +1,62 @@
 import React from 'react';
 import './Carrito.css';
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 const Carrito = ({ carrito, setCarrito }) => {
-  const incrementarCantidad = (index) => {
-    const actualizado = [...carrito];
-    actualizado[index].quantity += 1;
-    setCarrito(actualizado);
+  const incrementarCantidad = (id) => {
+    setCarrito(prev =>
+      prev.map(p =>
+        p.id === id ? { ...p, quantity: p.quantity + 1 } : p
+      )
+    );
   };
 
-  const disminuirCantidad = (index) => {
-    const actualizado = [...carrito];
-    if (actualizado[index].quantity > 1) {
-      actualizado[index].quantity -= 1;
-      setCarrito(actualizado);
-    }
+  const disminuirCantidad = (id) => {
+    setCarrito(prev =>
+      prev.map(p =>
+        p.id === id && p.quantity > 1
+          ? { ...p, quantity: p.quantity - 1 }
+          : p
+      )
+    );
   };
 
-  const eliminarProducto = (index) => {
-    const actualizado = carrito.filter((_, i) => i !== index);
-    setCarrito(actualizado);
+  const eliminarProducto = (id) => {
+    setCarrito(prev => prev.filter(p => p.id !== id));
   };
 
   const total = carrito.reduce((acc, item) => acc + item.precio * item.quantity, 0);
 
   return (
-    <div className="music-store">
-      <div className="banner">
-        <img src="/26.26.png" alt="Banner" />
-        <Link to="/agregar-producto" className="btn-add">
-          Agregar productos
-        </Link>
-      </div>
+    <div className="carrito-container">
+      <h2>🛒 Carrito de Compras</h2>
 
-      <div className="store-layout">
-        <aside className="sidebar">
-          <div className="sidebar-header">
-            <span>Artista</span>
-            <button className="btn-small">Editar</button>
-          </div>
-          <ul>
-            <li>ac/dc (5)</li>
-            <li>achile (4)</li>
-            <li>aerosmith (3)</li>
-            <li>africa keys (4)</li>
-            <li>arcade fire (10)</li>
-            <li>arctic monkeys (9)</li>
-            <li>ariana grande (5)</li>
-            <li>avril lavigne (5)</li>
-            <li className="mostrar">mostrar más</li>
-          </ul>
-          <ul>
-            <li>classical (10)</li>
-            <li>dance (10)</li>
-          </ul>
-        </aside>
-
-        <main className="grid">
-          {carrito.length === 0 ? (
-            <p style={{ margin: 'auto', fontSize: '1.2rem' }}>🛒 El carrito está vacío.</p>
-          ) : (
-            carrito.map((item, i) => (
-              <div className="card" key={i}>
-                <img src={item.imagen || '/default.png'} alt={item.nombre} />
-                <div className="card-title">
-                  <span>{item.nombre}</span>
-                  <button className="btn-delete" onClick={() => eliminarProducto(i)}>Eliminar</button>
-                </div>
-                <div className="card-text">{item.descripcion}</div>
-                <div className="card-price">${(item.precio * item.quantity).toFixed(2)}</div>
-                <div className="cantidad-control">
-                  <button onClick={() => disminuirCantidad(i)}>-</button>
+      {carrito.length === 0 ? (
+        <p>Tu carrito está vacío.</p>
+      ) : (
+        <div className="carrito-lista">
+          {carrito.map((item) => (
+            <div key={item.id} className="carrito-item">
+              <img src={item.imagen || '/default.png'} alt={item.nombre} width={80} />
+              <div>
+                <h4>{item.nombre}</h4>
+                <p>{item.descripcion}</p>
+                <p>Precio: ${item.precio}</p>
+                <div className="carrito-controles">
+                  <button onClick={() => disminuirCantidad(item.id)}>-</button>
                   <span>{item.quantity}</span>
-                  <button onClick={() => incrementarCantidad(i)}>+</button>
+                  <button onClick={() => incrementarCantidad(item.id)}>+</button>
                 </div>
+                <button onClick={() => eliminarProducto(item.id)} className="btn-eliminar">Eliminar</button>
               </div>
-            ))
-          )}
-        </main>
-      </div>
-
-      <div className="total-carrito">
-        <h3>Total: ${total.toFixed(2)}</h3>
-      </div>
+            </div>
+          ))}
+          <div className="carrito-total">
+            <h3>Total: ${total.toFixed(2)}</h3>
+            <Link to="/metodop" className="btn-pagar">Ir al pago</Link>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
