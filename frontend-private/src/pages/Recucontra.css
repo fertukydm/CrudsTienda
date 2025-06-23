@@ -101,7 +101,10 @@
 }
 
 .btn-activate:hover {
-  background-color: #b45309;
+  background-color: #000000;
+    border: 1px solid #d1d5db;
+    color: white;
+
 }
 
 .btn-cancel {
@@ -114,5 +117,7 @@
 }
 
 .btn-cancel:hover {
-  background-color: #6b7280;
+  background-color: #ffffff;
+   border: 1px solid #000000;
+    color: rgb(0, 0, 0);
 }

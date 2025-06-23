@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./Contranueva.css";
+import "./ContraNew.css";
 
 const Contranuevaa = () => {
   const [password, setPassword] = useState("");
@@ -17,7 +17,7 @@ const Contranuevaa = () => {
         {/* Imagen */}
         <div className="password-image-container">
           <img
-            src="/frontend-private/public/18.18.png"
+            src="/18.18.png"
             alt="Recuperación"
             className="password-image"
           />

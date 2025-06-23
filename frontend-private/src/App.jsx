@@ -14,6 +14,7 @@ import PrivateRoute from './components/PrivateRoute';
 import Contactmen from "./pages/ContactM";
 import Review from "./pages/ReviewA";
 import Verificarcodd from './pages/Verificarcod';
+import Contranuevaa from "./pages/Contranew";
 
  
 function App() {
@@ -92,6 +93,8 @@ function App() {
           <Route path="/agregar-producto" element={<Productos />} />
 
             <Route path="/verificar" element={<Verificarcodd />} />
+          <Route path="/ContraNew" element={<Contranuevaa />} />
+
 
           <Route path="/contactosMensaje" element={<Contactmen />} />
           <Route path="/Review" element={<Review />} />

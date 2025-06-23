@@ -1,9 +1,11 @@
 import React, { useState, useRef } from "react";
+import { useNavigate } from "react-router-dom"; // ⬅️ Importar para redirigir
 import "./Verificarcod.css";
 
 const Verificarcodd = () => {
   const [code, setCode] = useState(new Array(6).fill(""));
   const inputsRef = useRef([]);
+  const navigate = useNavigate(); // ⬅️ Hook de navegación
 
   const handleChange = (value, index) => {
     if (/^[0-9]?$/.test(value)) {
@@ -19,7 +21,19 @@ const Verificarcodd = () => {
   };
 
   const handleVerify = () => {
-    alert(`Código ingresado: ${code.join("")}`);
+    const enteredCode = code.join("");
+
+    if (enteredCode.length < 6 || code.includes("")) {
+      alert("Por favor ingresa los 6 dígitos del código.");
+      return;
+    }
+
+    alert(`Código ingresado: ${enteredCode}`);
+
+    // Simular validación y redirigir
+    setTimeout(() => {
+      navigate("/ContraNew"); // ⬅️ Redirigir a la vista para crear nueva contraseña
+    }, 500);
   };
 
   return (
@@ -32,7 +46,7 @@ const Verificarcodd = () => {
           <img
             src="/18.18.png"
             alt="Código de recuperación"
-            className="verify-image" 
+            className="verify-image"
           />
         </div>
 

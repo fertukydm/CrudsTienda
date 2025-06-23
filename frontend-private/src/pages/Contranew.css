@@ -1,4 +1,5 @@
 .password-container {
+     background: url('17.17.png') no-repeat center center fixed;
   min-height: 100vh;
   background-color: #f3f4f6;
   display: flex;
@@ -68,7 +69,7 @@
 }
 
 .btn-save {
-  background-color: #b45309;
+  background-color: #000000;
   color: white;
   padding: 0.5rem 1rem;
   border: none;
@@ -77,5 +78,7 @@
 }
 
 .btn-save:hover {
-  background-color: #92400e;
+  background-color: #ffffff;
+    border: 1px solid #000000;
+
 }
