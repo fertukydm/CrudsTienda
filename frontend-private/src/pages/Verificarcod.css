@@ -74,13 +74,15 @@
 }
 
 .verify-input {
-  width: 2.5rem;
+  min-width: 60px;
   height: 2.5rem;
   text-align: center;
   font-size: 1.25rem;
   border: 1px solid #d1d5db;
   border-radius: 0.375rem;
-  color: #000000 !important;
+  color: #000000 !important;         /* Texto negro */
+  background-color: #ffffff !important;  /* Fondo blanco */
+  caret-color: #000000;              /* Cursor negro */
 }
 
 .btn-verify {
@@ -93,5 +95,6 @@
 }
 
 .btn-verify:hover {
-  background-color: #92400e;
+  background-color: #ffffff;
+  border: 1px solid #000000;
 }

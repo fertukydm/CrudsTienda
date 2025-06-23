@@ -11,7 +11,7 @@ const Verificarcodd = () => {
       newCode[index] = value;
       setCode(newCode);
 
-      // Enfocar el siguiente campo
+      // Enfocar el siguiente input
       if (value && index < 5) {
         inputsRef.current[index + 1].focus();
       }
