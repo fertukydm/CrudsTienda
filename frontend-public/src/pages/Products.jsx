@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import './Products.css';
+import { useNavigate } from 'react-router-dom';
 
 const Producto = () => {
   const [albums, setAlbums] = useState([]);
   const [genres, setGenres] = useState([]);
   const [selectedGenre, setSelectedGenre] = useState(null);
   const [genreProducts, setGenreProducts] = useState({});
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -17,7 +20,6 @@ const Producto = () => {
         const data = await response.json();
         setAlbums(data);
 
-        // Agrupar por género dinámicamente
         const grouped = data.reduce((acc, album) => {
           const genre = album.genre || 'Sin género';
           if (!acc[genre]) acc[genre] = [];
@@ -37,7 +39,7 @@ const Producto = () => {
   return (
     <div className="music-store">
       <div className="banner">
-        <img src="/21.png" alt="Banner" />
+        <img src="/18.png" alt="Banner" />
       </div>
 
       <div className="store-layout">
@@ -75,6 +77,13 @@ const Producto = () => {
                 </div>
                 <div className="card-text">{album.authorName}</div>
                 <div className="card-price">${album.price}</div>
+
+                <button
+                  className="review-button"
+                  onClick={() => navigate(`/Review/${album._id}`)}
+                >
+                  Agregar Review
+                </button>
               </div>
             ))}
         </main>

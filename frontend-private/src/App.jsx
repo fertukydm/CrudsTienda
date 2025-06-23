@@ -11,6 +11,7 @@ import Productos from "./pages/Producto";
 import { AuthProvider } from './context/AuthContext';
 import PrivateRoute from './components/PrivateRoute';
 import Contactmen from "./pages/ContactM";
+import Review from "./pages/ReviewA";
  
 function App() {
   useEffect(() => {
@@ -33,7 +34,7 @@ function App() {
              <Route path="/metodop" element={<Metododepago />} />
             <Route path="/agregar-producto" element={<Productos />} />
             <Route path="/contactosMensaje" element={<Contactmen/>} />
-           
+            <Route path="/Review" element={<Review/>} />
             {/* Protegidas */}
             <Route element={<PrivateRoute />}>
 
