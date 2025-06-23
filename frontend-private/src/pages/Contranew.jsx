@@ -1,12 +1,17 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"; // ⬅️ Importar useNavigate
 import "./ContraNew.css";
 
 const Contranuevaa = () => {
   const [password, setPassword] = useState("");
+  const navigate = useNavigate(); // ⬅️ Inicializar
 
   const handleSave = () => {
     alert(`Nueva contraseña: ${password}`);
     setPassword("");
+
+    // Redirigir al login después de guardar
+    navigate("/login");
   };
 
   return (
