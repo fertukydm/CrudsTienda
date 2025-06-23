@@ -78,12 +78,22 @@ const Producto = () => {
                 <div className="card-text">{album.authorName}</div>
                 <div className="card-price">${album.price}</div>
 
-                <button
-                  className="review-button"
-                  onClick={() => navigate(`/Review/${album._id}`)}
-                >
-                  Agregar Review
-                </button>
+                // En el botón de review:
+           <button
+           className="review-button"
+          nClick={() => navigate(`/Review/${album._id}`)} // ✅ Mantener esta línea
+           style={{
+          padding: "8px 12px",
+           backgroundColor: "#007bff",
+          color: "white",
+          border: "none",
+          borderRadius: "4px",
+         cursor: "pointer",
+        marginTop: "10px"
+        }}
+         >
+      Agregar Review
+      </button>
               </div>
             ))}
         </main>
