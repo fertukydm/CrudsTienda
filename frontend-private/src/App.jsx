@@ -15,7 +15,7 @@ import Contactmen from "./pages/ContactM";
 import Review from "./pages/ReviewA";
  
 function App() {
-<<<<<<< HEAD
+
   const [carrito, setCarrito] = useState(() => {
     const guardado = localStorage.getItem('carrito');
     return guardado ? JSON.parse(guardado) : [];
@@ -24,9 +24,9 @@ function App() {
   useEffect(() => {
     localStorage.setItem('carrito', JSON.stringify(carrito));
   }, [carrito]);
-=======
+
   //  Agregar estado del carrito
-  const [carrito, setCarrito] = useState([]);
+  
 
   // Función para agregar al carrito
   const agregarAlCarrito = (producto) => {
@@ -43,7 +43,7 @@ function App() {
   };
 
  
->>>>>>> e4f9bbde7c8ba3eb157822eb141d4997191b93f8
+
 
   return (
     <AuthProvider>
@@ -52,7 +52,7 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/login" element={<Login />} />
-<<<<<<< HEAD
+
           <Route
             path="/"
             element={
@@ -76,12 +76,12 @@ function App() {
           />
 =======
           <Route path="/" element={<Home agregarAlCarrito={agregarAlCarrito} />} />
->>>>>>> e4f9bbde7c8ba3eb157822eb141d4997191b93f8
+
           <Route path="/recuperar" element={<Recuperar1 />} />
           <Route path="/carrito" element={<Carrito carrito={carrito} setCarrito={setCarrito} />} />
           <Route path="/metodop" element={<Metododepago />} />
           <Route path="/agregar-producto" element={<Productos />} />
-<<<<<<< HEAD
+
           <Route path="/contactosMensaje" element={<Contactmen />} />
 
 =======
@@ -89,7 +89,7 @@ function App() {
           <Route path="/Review" element={<Review/>} />
           
           {/* Protegidas */}
->>>>>>> e4f9bbde7c8ba3eb157822eb141d4997191b93f8
+
           <Route element={<PrivateRoute />}>
             <Route path="/pago" element={<Pago />} />
           </Route>
