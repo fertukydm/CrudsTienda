@@ -57,6 +57,11 @@ const Navbar = () => {
                 Mensajes de contactanos
               </Link>
             </li>
+             <li className="menu-item">
+              <Link to="/Review" className="menu-link" onClick={() => setMenuOpen(false)}>
+               Reviews
+              </Link>
+            </li>
           </ul>
         </div>
       )}

@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast'; // ✅ Agregar Toaster
 import Navbar from './components/Navbar';
 import Login from "./pages/Login"; 
 import Home from "./pages/Home"; 
@@ -11,9 +12,10 @@ import Productos from "./pages/Producto";
 import { AuthProvider } from './context/AuthContext';
 import PrivateRoute from './components/PrivateRoute';
 import Contactmen from "./pages/ContactM";
-import { Toaster } from 'react-hot-toast';
-
+import Review from "./pages/ReviewA";
+ 
 function App() {
+<<<<<<< HEAD
   const [carrito, setCarrito] = useState(() => {
     const guardado = localStorage.getItem('carrito');
     return guardado ? JSON.parse(guardado) : [];
@@ -22,14 +24,35 @@ function App() {
   useEffect(() => {
     localStorage.setItem('carrito', JSON.stringify(carrito));
   }, [carrito]);
+=======
+  //  Agregar estado del carrito
+  const [carrito, setCarrito] = useState([]);
+
+  // Función para agregar al carrito
+  const agregarAlCarrito = (producto) => {
+    const existente = carrito.find(item => item.id === producto.id);
+    if (existente) {
+      setCarrito(carrito.map(item => 
+        item.id === producto.id 
+          ? { ...item, quantity: item.quantity + 1 }
+          : item
+      ));
+    } else {
+      setCarrito([...carrito, { ...producto, quantity: 1 }]);
+    }
+  };
+
+ 
+>>>>>>> e4f9bbde7c8ba3eb157822eb141d4997191b93f8
 
   return (
     <AuthProvider>
       <>
+        <Toaster position="top-right" /> 
         <Navbar />
-        <Toaster position="top-right" />
         <Routes>
           <Route path="/login" element={<Login />} />
+<<<<<<< HEAD
           <Route
             path="/"
             element={
@@ -51,12 +74,22 @@ function App() {
               />
             }
           />
+=======
+          <Route path="/" element={<Home agregarAlCarrito={agregarAlCarrito} />} />
+>>>>>>> e4f9bbde7c8ba3eb157822eb141d4997191b93f8
           <Route path="/recuperar" element={<Recuperar1 />} />
           <Route path="/carrito" element={<Carrito carrito={carrito} setCarrito={setCarrito} />} />
           <Route path="/metodop" element={<Metododepago />} />
           <Route path="/agregar-producto" element={<Productos />} />
+<<<<<<< HEAD
           <Route path="/contactosMensaje" element={<Contactmen />} />
 
+=======
+          <Route path="/contactosMensaje" element={<Contactmen/>} />
+          <Route path="/Review" element={<Review/>} />
+          
+          {/* Protegidas */}
+>>>>>>> e4f9bbde7c8ba3eb157822eb141d4997191b93f8
           <Route element={<PrivateRoute />}>
             <Route path="/pago" element={<Pago />} />
           </Route>

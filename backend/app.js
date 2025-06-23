@@ -7,6 +7,7 @@ import productRoutes from "./src/routes/Product.js";
 import customerRoutes from "./src/routes/customer.js";
 import registerClientsRoutes from "./src/routes/registerClients.js";
 import contactRoutes from "./src/routes/contact.js";
+import ReviewRoutes from "./src/routes/review.js";
 
 dotenv.config();
 
@@ -31,6 +32,6 @@ app.use("/api/products", productRoutes);
 app.use("/api/customer",customerRoutes);
 app.use("/api/registerClients",registerClientsRoutes);
 app.use("/api/contacts",contactRoutes);
-
+app.use("/api/review", ReviewRoutes);
 
 export default app;

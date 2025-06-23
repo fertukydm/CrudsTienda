@@ -36,11 +36,12 @@ registerClientsController.register = async (req, res) => {
     const verificationCode = crypto.randomBytes(3).toString("hex");
 
     // Crear token con el código
-    const tokenCode = jsonwebtoken.sign(
-      { email, verificationCode },
-      config.JWT.secret,
-      { expiresIn: "2h" }
-    );
+    // En la función register, línea del token:
+   const tokenCode = jsonwebtoken.sign(
+     { email, verificationCode },
+    config.jwt.secret, // ✅ Cambio: config.JWT.secret -> config.jwt.secret
+    { expiresIn: "2h" }
+   );
 
     // Guardar token en cookie
     res.cookie("verificationToken", tokenCode, { maxAge: 2 * 60 * 60 * 1000 });
@@ -86,7 +87,7 @@ registerClientsController.verifyCodeEmail = async (req, res) => {
   const token = req.cookies.verificationToken;
 
   try {
-    const decoded = jsonwebtoken.verify(token, config.JWT.secret);
+   const decoded = jsonwebtoken.verify(token, config.jwt.secret);
     const { email, verificationCode: storedCode } = decoded;
 
     if (requireCode !== storedCode) {
