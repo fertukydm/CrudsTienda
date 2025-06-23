@@ -1,134 +1,88 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import './Carrito.css';
 import { Link } from "react-router-dom";
 
-const Carrito = () => {
-  const [albums, setAlbums] = useState([]);
-  const [selectedGenre, setSelectedGenre] = useState(null);
-  const [editingGenre, setEditingGenre] = useState(false);
-  const [genres, setGenres] = useState([]);  // <-- Aquí vacio inicialmente
-  const [newGenre, setNewGenre] = useState("");
-  const [genreProducts, setGenreProducts] = useState({});
+const Carrito = ({ carrito, setCarrito }) => {
+  const incrementarCantidad = (index) => {
+    const actualizado = [...carrito];
+    actualizado[index].quantity += 1;
+    setCarrito(actualizado);
+  };
 
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const response = await fetch('http://localhost:4001/api/products');
-        const data = await response.json();
-        setAlbums(data);
-
-        const grouped = data.reduce((acc, album) => {
-          const genre = album.genre || "Sin género";
-          if (!acc[genre]) acc[genre] = [];
-          acc[genre].push(album);
-          return acc;
-        }, {});
-        setGenreProducts(grouped);
-      } catch (error) {
-        console.error("Error al cargar productos:", error);
-      }
-    };
-    fetchProducts();
-  }, []);
-
-  const handleAddGenre = () => {
-    if (newGenre && !genres.includes(newGenre)) {
-      setGenres([...genres, newGenre]);
-      setNewGenre("");
+  const disminuirCantidad = (index) => {
+    const actualizado = [...carrito];
+    if (actualizado[index].quantity > 1) {
+      actualizado[index].quantity -= 1;
+      setCarrito(actualizado);
     }
   };
 
-  const handleDeleteGenre = (genreToRemove) => {
-    setGenres(genres.filter(g => g !== genreToRemove));
-    if (selectedGenre === genreToRemove) {
-      setSelectedGenre(null);
-    }
+  const eliminarProducto = (index) => {
+    const actualizado = carrito.filter((_, i) => i !== index);
+    setCarrito(actualizado);
   };
+
+  const total = carrito.reduce((acc, item) => acc + item.precio * item.quantity, 0);
 
   return (
     <div className="music-store">
       <div className="banner">
         <img src="/26.26.png" alt="Banner" />
-        <Link to="/agregar-producto" className="btn-add">Agregar productos</Link>
+        <Link to="/agregar-producto" className="btn-add">
+          Agregar productos
+        </Link>
       </div>
 
       <div className="store-layout">
         <aside className="sidebar">
           <div className="sidebar-header">
             <span>Artista</span>
-            <button className="btn-small" onClick={() => setEditingGenre(true)}>Editar</button>
+            <button className="btn-small">Editar</button>
           </div>
           <ul>
-            <li
-              style={{ cursor: 'pointer', fontWeight: !selectedGenre ? 'bold' : 'normal' }}
-              onClick={() => setSelectedGenre(null)}
-            >
-              Todos ({albums.length})
-            </li>
-
-            {genres.length === 0 ? (
-              <li style={{ fontStyle: 'italic', color: '#666' }}>
-                No hay géneros agregados
-              </li>
-            ) : (
-              genres.map((genre, index) => (
-                <li
-                  key={index}
-                  style={{ cursor: 'pointer', fontWeight: selectedGenre === genre ? 'bold' : 'normal' }}
-                  onClick={() => setSelectedGenre(genre)}
-                >
-                  {genre} ({genreProducts[genre]?.length || 0})
-                </li>
-              ))
-            )}
+            <li>ac/dc (5)</li>
+            <li>achile (4)</li>
+            <li>aerosmith (3)</li>
+            <li>africa keys (4)</li>
+            <li>arcade fire (10)</li>
+            <li>arctic monkeys (9)</li>
+            <li>ariana grande (5)</li>
+            <li>avril lavigne (5)</li>
+            <li className="mostrar">mostrar más</li>
+          </ul>
+          <ul>
+            <li>classical (10)</li>
+            <li>dance (10)</li>
           </ul>
         </aside>
 
         <main className="grid">
-          {albums
-            .filter(album => !selectedGenre || album.genre === selectedGenre)
-            .map((album, i) => (
+          {carrito.length === 0 ? (
+            <p style={{ margin: 'auto', fontSize: '1.2rem' }}>🛒 El carrito está vacío.</p>
+          ) : (
+            carrito.map((item, i) => (
               <div className="card" key={i}>
-                <img src={album.imageUrl || '/default.png'} alt={album.productName} />
+                <img src={item.imagen || '/default.png'} alt={item.nombre} />
                 <div className="card-title">
-                  <span>{album.productName}</span>
-                  <button className="btn-delete">Borrar</button>
+                  <span>{item.nombre}</span>
+                  <button className="btn-delete" onClick={() => eliminarProducto(i)}>Eliminar</button>
                 </div>
-                <div className="card-text">{album.authorName}</div>
-                <div className="card-price">${album.price}</div>
-                <button className="btn-small">Editar</button>
-                <button className="btn-small">Elegir este producto</button>
+                <div className="card-text">{item.descripcion}</div>
+                <div className="card-price">${(item.precio * item.quantity).toFixed(2)}</div>
+                <div className="cantidad-control">
+                  <button onClick={() => disminuirCantidad(i)}>-</button>
+                  <span>{item.quantity}</span>
+                  <button onClick={() => incrementarCantidad(i)}>+</button>
+                </div>
               </div>
-            ))}
+            ))
+          )}
         </main>
       </div>
 
-      {editingGenre && (
-        <div className="modal-overlay-edit">
-          <div className="modal-edit-card">
-            <h2>Editar Géneros</h2>
-
-            <input
-              type="text"
-              placeholder="Nuevo género"
-              value={newGenre}
-              onChange={(e) => setNewGenre(e.target.value)}
-            />
-            <button onClick={handleAddGenre} className="btn-save">Agregar</button>
-
-            <ul style={{ marginTop: '10px' }}>
-              {genres.map((genre, idx) => (
-                <li key={idx}>
-                  {genre}
-                  <button className="btn-delete" onClick={() => handleDeleteGenre(genre)}>X</button>
-                </li>
-              ))}
-            </ul>
-
-            <button onClick={() => setEditingGenre(false)} className="btn-cancel">Cerrar</button>
-          </div>
-        </div>
-      )}
+      <div className="total-carrito">
+        <h3>Total: ${total.toFixed(2)}</h3>
+      </div>
     </div>
   );
 };

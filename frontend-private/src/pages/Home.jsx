@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./Home.css";
+import toast from 'react-hot-toast';
 
 const Home = ({ agregarAlCarrito }) => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -37,15 +38,13 @@ const Home = ({ agregarAlCarrito }) => {
     }
   };
 
-  const handleAgregar = () => {
-    if (productoSeleccionado) {
-      agregarAlCarrito({ ...productoSeleccionado, quantity: 1 });
-      setMensajeAgregado(`✅ "${productoSeleccionado.nombre}" fue agregado al carrito.`);
-      setProductoSeleccionado(null);
-
-      setTimeout(() => setMensajeAgregado(""), 2500);
-    }
-  };
+const handleAgregar = () => {
+  if (productoSeleccionado) {
+    agregarAlCarrito({ ...productoSeleccionado, quantity: 1 });
+    toast.success(`"${productoSeleccionado.nombre}" agregado al carrito 🛒`);
+    setProductoSeleccionado(null);
+  }
+};
 
   const productosFiltrados = Object.entries(productosInfo).filter(
     ([, producto]) =>
