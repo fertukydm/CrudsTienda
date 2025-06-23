@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { Toaster } from 'react-hot-toast'; // ✅ Agregar Toaster
+import { Toaster } from 'react-hot-toast';
 import Navbar from './components/Navbar';
 import Login from "./pages/Login"; 
 import Home from "./pages/Home"; 
@@ -15,20 +15,18 @@ import Contactmen from "./pages/ContactM";
 import Review from "./pages/ReviewA";
  
 function App() {
-<<<<<<< HEAD
+  // ✅ Estado del carrito con persistencia en localStorage
   const [carrito, setCarrito] = useState(() => {
     const guardado = localStorage.getItem('carrito');
     return guardado ? JSON.parse(guardado) : [];
   });
 
+  // ✅ Efecto para guardar carrito en localStorage
   useEffect(() => {
     localStorage.setItem('carrito', JSON.stringify(carrito));
   }, [carrito]);
-=======
-  //  Agregar estado del carrito
-  const [carrito, setCarrito] = useState([]);
 
-  // Función para agregar al carrito
+  // ✅ Función para agregar al carrito
   const agregarAlCarrito = (producto) => {
     const existente = carrito.find(item => item.id === producto.id);
     if (existente) {
@@ -42,54 +40,23 @@ function App() {
     }
   };
 
- 
->>>>>>> e4f9bbde7c8ba3eb157822eb141d4997191b93f8
-
   return (
     <AuthProvider>
       <>
-        <Toaster position="top-right" /> 
+        <Toaster position="top-right" />
         <Navbar />
         <Routes>
+          {/* Rutas públicas */}
           <Route path="/login" element={<Login />} />
-<<<<<<< HEAD
-          <Route
-            path="/"
-            element={
-              <Home
-                agregarAlCarrito={(producto) => {
-                  const existe = carrito.find(p => p.id === producto.id);
-                  if (existe) {
-                    setCarrito(prev =>
-                      prev.map(p =>
-                        p.id === producto.id
-                          ? { ...p, quantity: p.quantity + 1 }
-                          : p
-                      )
-                    );
-                  } else {
-                    setCarrito(prev => [...prev, producto]);
-                  }
-                }}
-              />
-            }
-          />
-=======
           <Route path="/" element={<Home agregarAlCarrito={agregarAlCarrito} />} />
->>>>>>> e4f9bbde7c8ba3eb157822eb141d4997191b93f8
           <Route path="/recuperar" element={<Recuperar1 />} />
           <Route path="/carrito" element={<Carrito carrito={carrito} setCarrito={setCarrito} />} />
           <Route path="/metodop" element={<Metododepago />} />
           <Route path="/agregar-producto" element={<Productos />} />
-<<<<<<< HEAD
           <Route path="/contactosMensaje" element={<Contactmen />} />
-
-=======
-          <Route path="/contactosMensaje" element={<Contactmen/>} />
-          <Route path="/Review" element={<Review/>} />
+          <Route path="/Review" element={<Review />} />
           
-          {/* Protegidas */}
->>>>>>> e4f9bbde7c8ba3eb157822eb141d4997191b93f8
+          {/* Rutas protegidas */}
           <Route element={<PrivateRoute />}>
             <Route path="/pago" element={<Pago />} />
           </Route>
