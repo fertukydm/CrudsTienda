@@ -10,7 +10,8 @@ const Home = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/products');
+        // ✅ Puerto unificado 4001 para coincidir con el resto del frontend
+        const response = await fetch('http://localhost:4001/api/products');
         if (response.ok) {
           const data = await response.json();
           // Tomar solo los primeros 4 productos para destacados
@@ -22,6 +23,8 @@ const Home = () => {
             imagen: product.imageUrl || "/default.png",
             autor: product.authorName
           })));
+        } else {
+          throw new Error(`HTTP ${response.status}`);
         }
       } catch (error) {
         console.error("Error al cargar productos:", error);
@@ -96,41 +99,36 @@ const Home = () => {
   };
 
   return (
-    <div className="background-image">
-      {/* ✅ Corregir ruta de imagen */}
-      <img src="/12.png" alt="" />
+    <div className="home-img"> {/* ✅ Solo un contenedor, sin imagen suelta */}
+      <div className="relative">
+        <img
+          src="/OK RECORDS.png"
+          alt="Fondo de discos de vinilo"
+          className="background-img"
+        />
+      </div>
 
-      <div className="home-img">
-        <div className="relative">
-          <img
-            src="/OK RECORDS.png"
-            alt="Fondo de discos de vinilo"
-            className="background-img"
-          />
+      <div className="search-section">
+        <h2 className="search-title">Encuentra tu álbum favorito</h2>
+        <div className="search-container">
+          <input type="text" placeholder="Buscar" className="search-input" />
+          <button className="search-button">Buscar</button>
         </div>
+      </div>
 
-        <div className="search-section">
-          <h2 className="search-title">Encuentra tu álbum favorito</h2>
-          <div className="search-container">
-            <input type="text" placeholder="Buscar" className="search-input" />
-            <button className="search-button">Buscar</button>
-          </div>
-        </div>
-
-        <div className="featured-products">
-          <h3 className="featured-title">Productos destacados</h3>
-          <div className="products-container">
-            {productos.map((item) => (
-              <div key={item.id} className="product-item">
-                <img
-                  src={item.imagen}
-                  alt={item.nombre}
-                  className="product-img"
-                  onClick={() => setProductoSeleccionado(item)}
-                />
-              </div>
-            ))}
-          </div>
+      <div className="featured-products">
+        <h3 className="featured-title">Productos destacados</h3>
+        <div className="products-container">
+          {productos.map((item) => (
+            <div key={item.id} className="product-item">
+              <img
+                src={item.imagen}
+                alt={item.nombre}
+                className="product-img"
+                onClick={() => setProductoSeleccionado(item)}
+              />
+            </div>
+          ))}
         </div>
       </div>
 
