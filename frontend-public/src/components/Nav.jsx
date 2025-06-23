@@ -43,7 +43,7 @@ const Navbar = () => {
           {/* Usuario: /mi-cuenta */}
           <button className="desktop-only" onClick={() => {
             setMenuOpen(false);
-            navigate('/');
+            navigate('/login');
           }}>
             <img src="/27.png" alt="Usuario" className="navbar-icon" />
           </button>
