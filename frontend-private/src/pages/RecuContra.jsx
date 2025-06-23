@@ -1,11 +1,21 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"; // Importar useNavigate
 import "./Recucontra.css";
 
 const Recucontraa = () => {
   const [email, setEmail] = useState("");
+  const navigate = useNavigate(); // Inicializar navegación
 
   const handleSend = () => {
+    if (!email) return alert("Ingresa un correo válido");
+
     alert(`Enviaremos un correo a: ${email}`);
+
+    // Guardar el correo si lo necesitas más adelante
+    localStorage.setItem("correoRecuperacion", email);
+
+    // Redirigir a la pantalla de verificación de código
+    navigate("/verificar");
   };
 
   const handleCancel = () => {
@@ -13,19 +23,13 @@ const Recucontraa = () => {
   };
 
   return (
-    
     <div className="reset-container">
-      
       <h1 className="reset-title">Restablecer contraseña de cuenta</h1>
 
-      <div className=".home-container">
+      <div className="home-container">
         {/* Imagen */}
         <div className="reset-image-container">
-          <img
-            src="/18.18.png"
-            alt="Recuperación"
-            className="reset-image"
-          />
+          <img src="/18.18.png" alt="Recuperación" className="reset-image" />
         </div>
 
         {/* Formulario */}

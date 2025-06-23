@@ -13,6 +13,8 @@ import { AuthProvider } from './context/AuthContext';
 import PrivateRoute from './components/PrivateRoute';
 import Contactmen from "./pages/ContactM";
 import Review from "./pages/ReviewA";
+import Verificarcodd from './pages/Verificarcod';
+
  
 function App() {
 
@@ -86,8 +88,10 @@ function App() {
           <Route path="/recuperar" element={<Recuperar1 />} />
           <Route path="/carrito" element={<Carrito carrito={carrito} setCarrito={setCarrito} />} />
           <Route path="/metodop" element={<Metododepago />} />
+          
           <Route path="/agregar-producto" element={<Productos />} />
 
+            <Route path="/verificar" element={<Verificarcodd />} />
 
           <Route path="/contactosMensaje" element={<Contactmen />} />
           <Route path="/Review" element={<Review />} />

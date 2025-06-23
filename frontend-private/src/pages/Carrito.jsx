@@ -16,6 +16,42 @@ const Carrito = () => {
     fetchProducts();
     fetchGenres();
   }, []);
+  const addProductFromBackend = async (productId) => {
+  try {
+    const response = await fetch(`http://localhost:4001/api/products`);
+    if (response.ok) {
+      const products = await response.json();
+      const product = products.find(p => p._id === productId);
+      
+      if (product) {
+        const cartProduct = {
+          id: product._id,
+          nombre: product.productName,
+          precio: product.price, // ✅ Consistente
+          imagen: product.imageUrl || '/default.png',
+          formato: 'LP',
+          fechaLlegada: 'Arrives by 25 feb - 3 mar',
+          cantidad: 1 // ✅ Consistente
+        };
+        
+        setCartItems(prev => {
+          const existing = prev.find(item => item.id === productId);
+          if (existing) {
+            return prev.map(item =>
+              item.id === productId 
+                ? { ...item, cantidad: item.cantidad + 1 }
+                : item
+            );
+          } else {
+            return [...prev, cartProduct];
+          }
+        });
+      }
+    }
+  } catch (error) {
+    console.error('Error al agregar producto:', error);
+  }
+};
 
   const fetchProducts = async () => {
     try {
