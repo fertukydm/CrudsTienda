@@ -5,22 +5,22 @@ const promotionsSchema = new Schema(
   {
     namePromotions: {
       type: String,
-      require: true,
+      required: true,
     },
     id_article: {
       type: String,
     },
     price: {
         type: Number,
-        require: true,
+        required: true,
     },
     discount: {
     type: String,
-    require: true,
+    required: true,
     },
     total: {
         type:  Number ,
-        require: true,
+        required: true,
     }
     
   },

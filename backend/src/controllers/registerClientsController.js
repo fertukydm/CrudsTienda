@@ -55,13 +55,13 @@ registerClientsController.register = async (req, res) => {
       },
     });
 
-    // Datos del correo
-    const mailOptions = {
-      from: config.email.email_user,
-      to: email,
-      subject: "Email verification code",
-      text: `Your verification code is: ${verificationCode}. It expires in 2 hours.`,
-    };
+    // Solución
+const mailOptions = {
+  from: config.emailC.email_user,
+  to: email,
+  subject: "Email verification code",
+  text: `Your verification code is: ${verificationCode}. It expires in 2 hours.`,
+};
 
     // Enviar correo
     transporter.sendMail(mailOptions, (error, info) => {

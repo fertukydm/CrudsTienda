@@ -1,40 +1,66 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './home.css';
 
 const Home = () => {
   const [productoSeleccionado, setProductoSeleccionado] = useState(null);
   const [cartItems, setCartItems] = useState([]);
+  const [productos, setProductos] = useState([]);
 
-  const productos = [
-    {
-      id: 1,
-      nombre: "I love you",
-      descripcion: "Es el álbum debut de la banda estadounidense The Neighbourhood, y fue lanzado mundialmente el 22 de abril de 2013 por la compañía discográfica Columbia Records.",
-      precio: 49,
-      imagen: "/8.png"
-    },
-    {
-      id: 2,
-      nombre: "Kenia Os - Pink Aura",
-      descripcion: "Tercer álbum de estudio de la cantante mexicana Kenia Os. Se lanzó el 24 de abril de 2024",
-      precio: 67,
-      imagen: "/31.png"
-    },
-    {
-      id: 3,
-      nombre: "VICE VERSA - Rauw Alejandro",
-      descripcion: "Es el segundo álbum de estudio del cantante puertorriqueño Rauw Alejandro. Fue publicado el 25 de junio de 2021 a través del sello discográfico Sony Music",
-      precio: 59,
-      imagen: "/32.png"
-    },
-    {
-      id: 4,
-      nombre: "Short n' Sweet - Sabrina Carpenter",
-      descripcion: "Es el sexto álbum de estudio de la cantante estadounidense Sabrina Carpenter, publicado el 23 de agosto de 2024 por el sello Island Records.",
-      precio: 62,
-      imagen: "/34.png"
-    },
-  ];
+  // ✅ Cargar productos desde el backend
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/api/products');
+        if (response.ok) {
+          const data = await response.json();
+          // Tomar solo los primeros 4 productos para destacados
+          setProductos(data.slice(0, 4).map(product => ({
+            id: product._id,
+            nombre: product.productName,
+            descripcion: product.description || "Descripción no disponible",
+            precio: product.price,
+            imagen: product.imageUrl || "/default.png",
+            autor: product.authorName
+          })));
+        }
+      } catch (error) {
+        console.error("Error al cargar productos:", error);
+        // Fallback a productos estáticos si falla la conexión
+        setProductos([
+          {
+            id: 1,
+            nombre: "I love you",
+            descripcion: "Es el álbum debut de la banda estadounidense The Neighbourhood, y fue lanzado mundialmente el 22 de abril de 2013 por la compañía discográfica Columbia Records.",
+            precio: 49,
+            imagen: "/8.png"
+          },
+          {
+            id: 2,
+            nombre: "Kenia Os - Pink Aura",
+            descripcion: "Tercer álbum de estudio de la cantante mexicana Kenia Os. Se lanzó el 24 de abril de 2024",
+            precio: 67,
+            imagen: "/31.png"
+          },
+          {
+            id: 3,
+            nombre: "VICE VERSA - Rauw Alejandro",
+            descripcion: "Es el segundo álbum de estudio del cantante puertorriqueño Rauw Alejandro. Fue publicado el 25 de junio de 2021 a través del sello discográfico Sony Music",
+            precio: 59,
+            imagen: "/32.png"
+          },
+          {
+            id: 4,
+            nombre: "Short n' Sweet - Sabrina Carpenter",
+            descripcion: "Es el sexto álbum de estudio de la cantante estadounidense Sabrina Carpenter, publicado el 23 de agosto de 2024 por el sello Island Records.",
+            precio: 62,
+            imagen: "/34.png"
+          },
+        ]);
+      }
+    };
+
+    fetchProducts();
+  }, []);
 
   const agregarAlCarrito = (producto) => {
     setCartItems((prev) => {
@@ -50,13 +76,29 @@ const Home = () => {
         return [...prev, { ...producto, cantidad: 1 }];
       }
     });
+    
+    // ✅ Guardar en localStorage para compartir con el carrito
+    const cartData = JSON.parse(localStorage.getItem('cartItems') || '[]');
+    const existeEnStorage = cartData.find(item => item.id === producto.id);
+    
+    if (existeEnStorage) {
+      const updatedCart = cartData.map(item =>
+        item.id === producto.id ? { ...item, cantidad: item.cantidad + 1 } : item
+      );
+      localStorage.setItem('cartItems', JSON.stringify(updatedCart));
+    } else {
+      cartData.push({ ...producto, cantidad: 1 });
+      localStorage.setItem('cartItems', JSON.stringify(cartData));
+    }
+    
     alert(`Agregaste "${producto.nombre}" al carrito.`);
     setProductoSeleccionado(null); // Cerrar modal después de agregar
   };
 
   return (
     <div className="background-image">
-      <img src="/12.pn" alt="" />
+      {/* ✅ Corregir ruta de imagen */}
+      <img src="/12.png" alt="" />
 
       <div className="home-img">
         <div className="relative">
@@ -98,6 +140,9 @@ const Home = () => {
             <h3>{productoSeleccionado.nombre}</h3>
             <p>{productoSeleccionado.descripcion}</p>
             <p><strong>Precio:</strong> ${productoSeleccionado.precio.toFixed(2)}</p>
+            {productoSeleccionado.autor && (
+              <p><strong>Autor:</strong> {productoSeleccionado.autor}</p>
+            )}
             <button
               onClick={() => agregarAlCarrito(productoSeleccionado)}
               style={{

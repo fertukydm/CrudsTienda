@@ -2,8 +2,14 @@ const categoriesController = {};
 import categoriesModel from "../models/categories.js"; 
 
 // SELECT
+//  Solución
 categoriesController.getCategories = async (req, res) => {
-  const categories = await categoriesModel.find(); 
+  try {
+    const categories = await categoriesModel.find();
+    res.json(categories);
+  } catch (error) {
+    res.status(500).json({ message: "Error al obtener categorías", error });
+  }
 };
 
 // INSERT

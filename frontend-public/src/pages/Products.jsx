@@ -13,6 +13,7 @@ const Producto = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
+       
         const response = await fetch('http://localhost:4001/api/products');
         if (!response.ok) {
           throw new Error('Error al obtener los productos');
@@ -78,22 +79,21 @@ const Producto = () => {
                 <div className="card-text">{album.authorName}</div>
                 <div className="card-price">${album.price}</div>
 
-                // En el botón de review:
-           <button
-           className="review-button"
-          nClick={() => navigate(`/Review/${album._id}`)} // ✅ Mantener esta línea
-           style={{
-          padding: "8px 12px",
-           backgroundColor: "#007bff",
-          color: "white",
-          border: "none",
-          borderRadius: "4px",
-         cursor: "pointer",
-        marginTop: "10px"
-        }}
-         >
-      Agregar Review
-      </button>
+                <button
+                  className="review-button"
+                  onClick={() => navigate(`/Review/${album._id}`)} 
+                  style={{
+                    padding: "8px 12px",
+                    backgroundColor: "#007bff",
+                    color: "white",
+                    border: "none",
+                    borderRadius: "4px",
+                    cursor: "pointer",
+                    marginTop: "10px"
+                  }}
+                >
+                  Agregar Review
+                </button>
               </div>
             ))}
         </main>

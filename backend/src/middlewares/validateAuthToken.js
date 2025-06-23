@@ -1,5 +1,9 @@
 import jwt from 'jsonwebtoken';
 import Review from '../models/Review.js'; 
+// ✅ Solución
+import { config } from '../config.js';
+
+
 
 // ✅ Verifica token JWT obligatorio
 export const authenticateToken = (req, res, next) => {
@@ -10,7 +14,7 @@ export const authenticateToken = (req, res, next) => {
   }
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET || 'tu_clave_secreta');
+    const decoded = jwt.verify(token, config.jwt.secret);
     req.user = decoded;
     next();
   } catch (err) {

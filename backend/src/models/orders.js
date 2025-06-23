@@ -1,62 +1,61 @@
-
 import { Schema, model } from "mongoose";
 
 const ordersSchema = new Schema(
   {
     id_user: {
-      type: String,
-      require: true,
+      type: Schema.Types.ObjectId,
+      ref: 'customers',
+      required: true,
     },
     address: {
       type: String,
-      require: true,
-
+      required: true,
     },
     id_product: {
-        type: String,
-        require: true,
+      type: Schema.Types.ObjectId,
+      ref: 'product',
+      required: true,
     },
-
     id_article: {
-    type: String,
-    require: true,
+      type: String,
+      required: true,
     },
-
     id_categories: {
-        type:  String ,
-        require: true,
+      type: Schema.Types.ObjectId,
+      ref: 'categories',
+      required: true,
     },
     phone: {
-        type:  String ,
-        require: true,
-    }
-    ,
+      type: String,
+      required: true,
+    },
     id_pay: {
-        type:  String ,
-        require: true,
-    }
-    ,
+      type: Schema.Types.ObjectId,
+      ref: 'pay',
+      required: true,
+    },
     price: {
-        type:  Number ,
-        require: true,
-    }
-    ,
+      type: Number,
+      required: true,
+      min: 0,
+    },
     state: {
-        type:  String ,
-        require: true,
-    }
-    ,
+      type: String,
+      required: true,
+      enum: ['pending', 'processing', 'shipped', 'delivered', 'cancelled'],
+      default: 'pending'
+    },
     total: {
-        type:  Number ,
-        require: true,
+      type: Number,
+      required: true,
+      min: 0,
     }
-    
   },
   {
     timestamps: true,
-    strict: false,
   }
 );
+
 export default model("orders", ordersSchema);
 
 
