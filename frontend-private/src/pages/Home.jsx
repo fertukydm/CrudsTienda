@@ -5,7 +5,6 @@ import toast from 'react-hot-toast';
 const Home = ({ agregarAlCarrito }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [productoSeleccionado, setProductoSeleccionado] = useState(null);
-  const [mensajeAgregado, setMensajeAgregado] = useState(""); // Cambiado a string
 
   const productosInfo = {
     1: {
@@ -13,38 +12,38 @@ const Home = ({ agregarAlCarrito }) => {
       nombre: "I love you",
       descripcion: "Álbum debut de The Neighbourhood",
       precio: 49,
-      imagen: "../public/8.8.png"
+      imagen: "/8.8.png"
     },
     2: {
       id: 2,
       nombre: "Orquídeas",
       descripcion: "Álbum de Kali Uchis lanzado en 2024",
       precio: 67,
-      imagen: "../public/9.9.png"
+      imagen: "/9.9.png"
     },
     3: {
       id: 3,
       nombre: "After Hours",
       descripcion: "Álbum de The Weeknd lanzado en 2020",
       precio: 59,
-      imagen: "../public/10.10.png"
+      imagen: "/10.10.png"
     },
     4: {
       id: 4,
       nombre: "CINEMA",
       descripcion: "Álbum debut de The Marías (2021)",
       precio: 62,
-      imagen: "../public/11.11.png"
+      imagen: "/11.11.png"
     }
   };
 
-const handleAgregar = () => {
-  if (productoSeleccionado) {
-    agregarAlCarrito({ ...productoSeleccionado, quantity: 1 });
-    toast.success(`"${productoSeleccionado.nombre}" agregado al carrito 🛒`);
-    setProductoSeleccionado(null);
-  }
-};
+  const handleAgregar = () => {
+    if (productoSeleccionado) {
+      agregarAlCarrito({ ...productoSeleccionado, quantity: 1 });
+      toast.success(`✅ "${productoSeleccionado.nombre}" fue agregado al carrito.`);
+      setProductoSeleccionado(null);
+    }
+  };
 
   const productosFiltrados = Object.entries(productosInfo).filter(
     ([, producto]) =>
@@ -53,12 +52,6 @@ const handleAgregar = () => {
 
   return (
     <div className="background-image">
-      {mensajeAgregado && (
-        <div className="mensaje-agregado">
-          {mensajeAgregado}
-        </div>
-      )}
-
       <div className="home-img">
         <div className="relative">
           <img src="/1.1.png" alt="" className="background-img" />
@@ -74,7 +67,6 @@ const handleAgregar = () => {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
-            <button className="search-button">Buscar</button>
           </div>
         </div>
 
@@ -87,11 +79,7 @@ const handleAgregar = () => {
                 className="product-item"
                 onClick={() => setProductoSeleccionado(item)}
               >
-                <img
-                  src={item.imagen}
-                  alt={item.nombre}
-                  className="product-img"
-                />
+                <img src={item.imagen} alt={item.nombre} className="product-img" />
               </div>
             ))}
           </div>
@@ -105,30 +93,10 @@ const handleAgregar = () => {
             <p>{productoSeleccionado.descripcion}</p>
             <p><strong>Precio:</strong> ${productoSeleccionado.precio.toFixed(2)}</p>
             <div style={{ display: "flex", gap: "10px", justifyContent: "center", marginTop: "15px" }}>
-              <button
-                onClick={handleAgregar}
-                style={{
-                  padding: "8px 14px",
-                  backgroundColor: "#4caf50",
-                  color: "#fff",
-                  border: "none",
-                  borderRadius: "6px",
-                  cursor: "pointer"
-                }}
-              >
+              <button onClick={handleAgregar} className="btn-agregar">
                 Agregar al carrito
               </button>
-              <button
-                onClick={() => setProductoSeleccionado(null)}
-                style={{
-                  padding: "8px 14px",
-                  backgroundColor: "#000",
-                  color: "#fff",
-                  border: "none",
-                  borderRadius: "6px",
-                  cursor: "pointer"
-                }}
-              >
+              <button onClick={() => setProductoSeleccionado(null)} className="btn-cancelar">
                 Cerrar
               </button>
             </div>
