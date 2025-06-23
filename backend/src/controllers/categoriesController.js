@@ -1,31 +1,29 @@
-// Creo un array de funciones
 const categoriesController = {};
-import categoriesController from "../models/categories.js";
+import categoriesModel from "../models/categories.js"; 
 
 // SELECT
 categoriesController.getCategories = async (req, res) => {
-  const categories = await categoriesmodel.find();
-  res.json(categories);
+  const categories = await categoriesModel.find(); 
 };
 
 // INSERT
 categoriesController.insertCategories = async (req, res) => {
-  const { gender, subgender  } = req.body;
-  const newcategories = new categoriesmodel({ name });
+  const { gender, subgender } = req.body; 
+  const newcategories = new categoriesModel({ gender, subgender }); 
   await newcategories.save();
   res.json({ message: "categorie saved" });
 };
 
 // DELETE
 categoriesController.deleteCategories = async (req, res) => {
-  await categoriesmodel.findByIdAndDelete(req.params.id);
+  await categoriesModel.findByIdAndDelete(req.params.id); 
   res.json({ message: "categories deleted" });
 };
 
 // UPDATE
 categoriesController.updateCategories = async (req, res) => {
-  const { name } = req.body;
-  const updateCategories = await categoriesmodel.findByIdAndUpdate(
+  const { gender, subgender } = req.body; 
+  const updateCategories = await categoriesModel.findByIdAndUpdate(
     req.params.id,
     { gender, subgender },
     { new: true }

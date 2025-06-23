@@ -5,8 +5,7 @@ import {
   optionalAuth,
   checkReviewOwnership,
   reviewRateLimit
-} from '../middleware/authMiddleware.js';
-
+} from '../middlewares/validateAuthToken.js'; 
 const router = express.Router();
 
 router.get('/product/:productId', optionalAuth, reviewsController.getReviewsByProduct);

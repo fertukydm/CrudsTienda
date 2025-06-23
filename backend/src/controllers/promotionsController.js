@@ -1,36 +1,31 @@
 const promotionsController = {};
-import promotions from "../models/promotions.js";
-import promotionsController from "../models/promotions";
- 
- 
+import promotionsModel from "../models/promotions.js"; // ✅ Cambio: promotions -> promotionsModel
+
 promotionsController.getPromotions = async (req, res) => {
-  const promotions = await promotionsController.find();
+  const promotions = await promotionsModel.find(); // ✅ Cambio: promotionsController -> promotionsModel
   res.json(promotions);
 };
- 
- 
+
 promotionsController.insertPromotions = async (req, res) => {
-  const { namePromotins, id_article, proce, discount, total  } = req.body;
-  const newPromotions = new promotionsModel({ namePromotins, id_article, proce, discount, total });
+  const { namePromotions, id_article, price, discount, total } = req.body; // ✅ Cambio: namePromotins -> namePromotions, proce -> price
+  const newPromotions = new promotionsModel({ namePromotions, id_article, price, discount, total });
   await newPromotions.save();
   res.json({ message: "Promotions saved" });
 };
- 
- 
+
 promotionsController.deletePromotions = async (req, res) => {
-  await promotionsController.findByIdAndDelete(req.params.id);
+  await promotionsModel.findByIdAndDelete(req.params.id); // ✅ Cambio: promotionsController -> promotionsModel
   res.json({ message: "Promotions deleted" });
 };
- 
- 
+
 promotionsController.updatePromotions = async (req, res) => {
-  const { namePromotins, id_article, proce, discount, total  } = req.body;
-  const updatePromotions = await promotionsController.findByIdAndUpdate(
+  const { namePromotions, id_article, price, discount, total } = req.body; // ✅ Cambio: namePromotins -> namePromotions, proce -> price
+  const updatePromotions = await promotionsModel.findByIdAndUpdate(
     req.params.id,
-    { namePromotins, id_article, proce, discount, total  },
+    { namePromotions, id_article, price, discount, total },
     { new: true }
   );
   res.json({ message: "promotions updated successfully" });
 };
- 
+
 export default promotionsController;

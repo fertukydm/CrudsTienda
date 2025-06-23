@@ -1,18 +1,6 @@
 import PayModel from "../models/pay.js";
 
 const payController = {};
-payController.insertPay = async (req, res) => {
-  try {
-    const { paymentMethod } = req.body;
-    const newPay = new PayModel({ paymentMethod });
-    await newPay.save();
-    res.status(201).json({ message: "Método de pago guardado correctamente" });
-  } catch (error) {
-    console.error("Error al guardar método de pago:", error);
-    res.status(500).json({ message: "Error en el servidor" });
-  }
-};
-
 
 payController.getPay = async (req, res) => {
   try {
@@ -23,6 +11,7 @@ payController.getPay = async (req, res) => {
   }
 };
 
+// ✅ Solo una función insertPay
 payController.insertPay = async (req, res) => {
   try {
     const { paymentMethod } = req.body;

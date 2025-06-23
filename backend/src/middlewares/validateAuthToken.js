@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import Review from '../models/review.js'; 
+import Review from '../models/Review.js'; 
 
 // ✅ Verifica token JWT obligatorio
 export const authenticateToken = (req, res, next) => {
