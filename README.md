@@ -34,17 +34,18 @@ Se ofrecen más de **15 géneros musicales**, con atención personalizada y entr
 ## 📁 Estructura del Proyecto
 
 ok-records/
-├── frontend-private/ 
-│ ├── src/
-│ ├── public/
-│ └── package.json
+├── frontend-private/         # Panel de administración
+│   ├── src/                  # Código fuente del admin (componentes, vistas, etc.)
+│   ├── public/               # Archivos públicos (imágenes, favicon, etc.)
+│   └── package.json          # Configuración y dependencias del admin
 │
-├── frontend-public/ 
-│ ├── src/
-│ ├── public/
-│ └── package.json
+├── frontend-public/          # Sitio público para clientes
+│   ├── src/                  # Código fuente del cliente
+│   ├── public/               # Archivos públicos del cliente
+│   └── package.json          # Configuración y dependencias del cliente
 │
-└── README.md
+└── README.md                 # Documentación del proyecto
+
 
 ##  ¿Cómo ejecutar la aplicación?
 
