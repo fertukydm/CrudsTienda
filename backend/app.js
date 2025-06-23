@@ -13,10 +13,14 @@ dotenv.config();
 
 const app = express();
 
-
 const corsOptions = {
-  origin: 'http://localhost:5173',  // Cambia esto a tu dominio si lo necesitas
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  origin: [
+    'http://localhost:5173',
+    'http://localhost:5174',  // Add this line
+    'http://localhost:3000',  // Add other ports you might use
+  ],
+  credentials: true,
+  optionsSuccessStatus: 200
 };
 
 app.use(cors(corsOptions));

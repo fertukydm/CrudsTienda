@@ -141,42 +141,65 @@ const Producto = () => {
     setSortBy('name');
   };
 
+  // ✅ Función mejorada para agregar al carrito con estructura consistente
   const addToCart = (product) => {
     try {
       // Obtener carrito actual del localStorage
       const currentCart = JSON.parse(localStorage.getItem('cartItems') || '[]');
       
       // Verificar si el producto ya está en el carrito
-      const existingProduct = currentCart.find(item => item.id === product._id);
+      const existingProductIndex = currentCart.findIndex(item => item.id === product._id);
       
-      if (existingProduct) {
+      if (existingProductIndex !== -1) {
         // Si existe, aumentar la cantidad
-        const updatedCart = currentCart.map(item =>
-          item.id === product._id 
-            ? { ...item, cantidad: item.cantidad + 1 }
-            : item
-        );
-        localStorage.setItem('cartItems', JSON.stringify(updatedCart));
+        currentCart[existingProductIndex].cantidad += 1;
       } else {
-        // Si no existe, agregar nuevo producto
+        // Si no existe, agregar nuevo producto con estructura consistente
         const cartProduct = {
           id: product._id,
           nombre: product.productName,
+          name: product.productName, // Compatibilidad adicional
           precio: product.price,
+          price: product.price, // Compatibilidad adicional
           imagen: product.imageUrl || '/default.png',
+          image: product.imageUrl || '/default.png', // Compatibilidad adicional
           formato: 'LP',
+          format: 'LP', // Compatibilidad adicional
           fechaLlegada: 'Arrives by 25 feb - 3 mar',
-          cantidad: 1
+          arrivalDate: 'Arrives by 25 feb - 3 mar', // Compatibilidad adicional
+          cantidad: 1,
+          quantity: 1, // Compatibilidad adicional
+          // Datos adicionales del producto
+          artista: product.authorName,
+          genero: product.genre,
+          descripcion: product.description
         };
         currentCart.push(cartProduct);
-        localStorage.setItem('cartItems', JSON.stringify(currentCart));
       }
       
+      // Guardar en localStorage
+      localStorage.setItem('cartItems', JSON.stringify(currentCart));
+      
+      // Disparar evento personalizado para notificar cambios en el carrito
+      window.dispatchEvent(new Event('cartUpdated'));
+      
+      // Mostrar confirmación
       alert(`"${product.productName}" agregado al carrito!`);
+      
+      console.log('✅ Producto agregado al carrito:', {
+        producto: product.productName,
+        carrito: currentCart
+      });
+      
     } catch (error) {
-      console.error('Error al agregar al carrito:', error);
+      console.error('❌ Error al agregar al carrito:', error);
       alert('Error al agregar producto al carrito');
     }
+  };
+
+  // ✅ Función para ir al carrito
+  const goToCart = () => {
+    navigate('/carrito');
   };
 
   if (loading) {
@@ -240,6 +263,11 @@ const Producto = () => {
           
           <button onClick={clearFilters} className="clear-filters-btn">
             Limpiar Filtros
+          </button>
+          
+          {/* ✅ Botón para ir al carrito */}
+          <button onClick={goToCart} className="cart-btn">
+            Ver Carrito 🛒
           </button>
         </div>
       </div>
@@ -367,7 +395,7 @@ const Producto = () => {
                       className="add-to-cart-btn"
                       onClick={() => addToCart(album)}
                     >
-                      Agregar al Carrito
+                      Agregar al Carrito 🛒
                     </button>
                     
                     <button
