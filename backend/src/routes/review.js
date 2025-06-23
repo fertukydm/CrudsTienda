@@ -1,5 +1,5 @@
 import express from 'express';
-import reviewsController from '../controllers/reviewsController.js';
+import reviewsController from '../controllers/reviewController.js';
 import {
   authenticateToken,
   optionalAuth,
