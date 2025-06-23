@@ -27,7 +27,7 @@ const Navbar = () => {
           {/* Buscar: /buscar */}
           <button onClick={() => {
             setMenuOpen(false);
-            navigate('/Product');
+            navigate('/producto');
           }}>
             <img src="/26.png" alt="Buscar" className="navbar-icon" />
           </button>
@@ -76,11 +76,6 @@ const Navbar = () => {
               <li className="menu-item">
                 <Link to="/politica" className="menu-link" onClick={() => setMenuOpen(false)}>
                   Nuestra política
-                </Link>
-              </li>
-              <li className="menu-item">
-                <Link to="/mi-cuenta" className="menu-link" onClick={() => setMenuOpen(false)}>
-                  Mi cuenta
                 </Link>
               </li>
               <li className="menu-item">

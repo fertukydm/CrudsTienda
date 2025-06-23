@@ -7,11 +7,14 @@
     padding: 2rem;
   }
   .crear-cuenta-container {
-    display: flex;
-    min-height: 100vh;
-    background-color: #f2f2f2;
-  }
-  
+  display: flex;
+  min-height: 100vh;
+  background-image: url('/39.png'); /* Fondo general */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
   
   .form-section {
     flex: 1;

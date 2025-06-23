@@ -2,8 +2,11 @@ import express from "express";
 import cors from "cors";
 import loginRoutes from "./src/routes/Login.js";
 import dotenv from "dotenv";
-import registerRoutes from "./src/routes/registerEmployee.js"
-import productRoutes from "./src/routes/Product.js"
+import registerRoutes from "./src/routes/registerEmployee.js";
+import productRoutes from "./src/routes/Product.js";
+import customerRoutes from "./src/routes/customer.js";
+import registerClientsRoutes from "./src/routes/registerClients.js";
+import contactRoutes from "./src/routes/contact.js";
 
 dotenv.config();
 
@@ -25,6 +28,9 @@ app.use(express.json());
 app.use("/api/login", loginRoutes);
 app.use("/api/registerEmployee", registerRoutes);
 app.use("/api/products", productRoutes);
+app.use("/api/customer",customerRoutes);
+app.use("/api/registerClients",registerClientsRoutes);
+app.use("/api/contacts",contactRoutes);
 
 
 export default app;

@@ -22,6 +22,12 @@ const productSchema = new Schema(
       type: String,
       required: false,
     },
+    genre: {
+      type: String,
+      required: true, 
+      default: "Sin género"
+    }
+    
   },
   {
     timestamps: true,

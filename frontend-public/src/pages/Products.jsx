@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import './Products.css';
-import { Link } from "react-router-dom";
 
 const Producto = () => {
   const [albums, setAlbums] = useState([]);
+  const [genres, setGenres] = useState([]);
+  const [selectedGenre, setSelectedGenre] = useState(null);
+  const [genreProducts, setGenreProducts] = useState({});
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -14,6 +16,16 @@ const Producto = () => {
         }
         const data = await response.json();
         setAlbums(data);
+
+        // Agrupar por género dinámicamente
+        const grouped = data.reduce((acc, album) => {
+          const genre = album.genre || 'Sin género';
+          if (!acc[genre]) acc[genre] = [];
+          acc[genre].push(album);
+          return acc;
+        }, {});
+        setGenreProducts(grouped);
+        setGenres(Object.keys(grouped));
       } catch (error) {
         console.error("Error al cargar los productos:", error);
       }
@@ -26,47 +38,45 @@ const Producto = () => {
     <div className="music-store">
       <div className="banner">
         <img src="/21.png" alt="Banner" />
-        {/* <Link to="/agregar-producto" className="btn-add">
-          Agregar productos
-        </Link> */}
       </div>
 
       <div className="store-layout">
         <aside className="sidebar">
           <div className="sidebar-header">
-            <span>Artista</span>
-            {/* <button className="btn-small">Editar</button> */}
+            <span>Géneros</span>
           </div>
           <ul>
-            <li>ac/dc (5)</li>
-            <li>achile (4)</li>
-            <li>aerosmith (3)</li>
-            <li>africa keys (4)</li>
-            <li>arcade fire (10)</li>
-            <li>arctic monkeys (9)</li>
-            <li>ariana grande (5)</li>
-            <li>avril lavigne (5)</li>
-            <li className="mostrar">mostrar más</li>
-          </ul>
-          <ul>
-            <li>classical (10)</li>
-            <li>dance (10)</li>
+            <li
+              style={{ cursor: 'pointer', fontWeight: !selectedGenre ? 'bold' : 'normal' }}
+              onClick={() => setSelectedGenre(null)}
+            >
+              Todos ({albums.length})
+            </li>
+            {genres.map((genre, index) => (
+              <li
+                key={index}
+                style={{ cursor: 'pointer', fontWeight: selectedGenre === genre ? 'bold' : 'normal' }}
+                onClick={() => setSelectedGenre(genre)}
+              >
+                {genre} ({genreProducts[genre]?.length || 0})
+              </li>
+            ))}
           </ul>
         </aside>
 
         <main className="grid">
-          {albums.map((album, i) => (
-            <div className="card" key={i}>
-              <img src={album.imageUrl || '/default.png'} alt={album.productName} />
-              <div className="card-title">
-                <span>{album.productName}</span>
-                {/* botones eliminados */}
+          {albums
+            .filter(album => !selectedGenre || album.genre === selectedGenre)
+            .map((album, i) => (
+              <div className="card" key={i}>
+                <img src={album.imageUrl || '/default.png'} alt={album.productName} />
+                <div className="card-title">
+                  <span>{album.productName}</span>
+                </div>
+                <div className="card-text">{album.authorName}</div>
+                <div className="card-price">${album.price}</div>
               </div>
-              <div className="card-text">{album.authorName}</div>
-              <div className="card-price">{album.price}</div>
-              {/* botones eliminados */}
-            </div>
-          ))}
+            ))}
         </main>
       </div>
     </div>

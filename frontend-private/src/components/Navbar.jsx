@@ -52,6 +52,11 @@ const Navbar = () => {
                 Método de pago
               </Link>
             </li>
+            <li className="menu-item">
+              <Link to="/contactosMensaje" className="menu-link" onClick={() => setMenuOpen(false)}>
+                Mensajes de contactanos
+              </Link>
+            </li>
           </ul>
         </div>
       )}

@@ -10,7 +10,7 @@ productController.getProducts = async (req, res) => {
 
 // INSERT product
 productController.insertProduct = async (req, res) => {
-  const { authorName, productName, description, price, imageUrl } = req.body;
+  const { authorName, productName, description, price, imageUrl, genre } = req.body;
 
   const newProduct = new productsModel({
     authorName,
@@ -18,6 +18,7 @@ productController.insertProduct = async (req, res) => {
     description,
     price,
     imageUrl,
+    genre, 
   });
 
   await newProduct.save();
@@ -32,7 +33,7 @@ productController.deleteProduct = async (req, res) => {
 
 // UPDATE product
 productController.updateProduct = async (req, res) => {
-  const { authorName, productName, description, price, imageUrl } = req.body;
+  const { authorName, productName, description, price, imageUrl, genre } = req.body;
 
   const updatedProduct = await productsModel.findByIdAndUpdate(
     req.params.id,
@@ -42,6 +43,7 @@ productController.updateProduct = async (req, res) => {
       description,
       price,
       imageUrl,
+      genre, 
     },
     { new: true }
   );

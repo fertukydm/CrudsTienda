@@ -14,6 +14,10 @@ export const config = {
     email: process.env.EMAIL || "okrecords71@gmail.com", // Correo de la aplicación
     password: process.env.APP_PASSWORD_EMAIL, // Contraseña de la aplicación
   },
+    emailC: {
+    email_user: process.env.EMAIL_USER,
+    email_pass: process.env.EMAIL_PASS,
+  },
   admin: {
     email: process.env.ADMIN_EMAIL,
     password: process.env.ADMIN_PASSWORD,

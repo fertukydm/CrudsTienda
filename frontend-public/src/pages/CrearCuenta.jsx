@@ -1,6 +1,6 @@
-
 import React, { useState } from 'react';
 import './CrearCuenta.css';
+import { Toaster, toast } from 'react-hot-toast';
 
 const CrearCuenta = () => {
   const [formData, setFormData] = useState({
@@ -40,16 +40,49 @@ const CrearCuenta = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (validate()) {
-      console.log("Datos enviados:", formData);
-      alert("Cuenta creada correctamente!");
+    if (!validate()) return;
+
+    try {
+      const res = await fetch("http://localhost:4001/api/registerClients", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          name: formData.nombre,
+          lastName: formData.apellidos,
+          email: formData.email,
+          password: formData.password
+        })
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        toast.success(data.message || "Cuenta creada correctamente.");
+        // Limpiar formulario
+        setFormData({
+          nombre: "",
+          apellidos: "",
+          email: "",
+          password: ""
+        });
+      } else {
+        toast.error(data.message || "Error al crear cuenta.");
+      }
+    } catch (error) {
+      toast.error("Error al conectar con el servidor.");
+      console.error("Error:", error);
     }
   };
 
   return (
+    
     <div className="crear-cuenta-container">
+      <Toaster position="top-center" />
+
       <div className="form-section">
         <form onSubmit={handleSubmit} className="formulario">
           <input
@@ -101,9 +134,7 @@ const CrearCuenta = () => {
       </div>
 
       <div className="image-section">
-        <div className="overlay">
-          
-        </div>
+        <div className="overlay"></div>
       </div>
     </div>
   );

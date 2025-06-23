@@ -3,105 +3,45 @@ import './Carrito.css';
 import { Link } from "react-router-dom";
 
 const Carrito = () => {
-  const [albums, setAlbums] = useState([]);  // Estado para productos
-  const [editingAlbumIndex, setEditingAlbumIndex] = useState(null);  // Para identificar cuál producto editar
-  const [formData, setFormData] = useState({
-    productName: '',
-    authorName: '',
-    price: '',
-    imageUrl: '',
-  });  // Datos del producto en el formulario
+  const [albums, setAlbums] = useState([]);
+  const [selectedGenre, setSelectedGenre] = useState(null);
+  const [editingGenre, setEditingGenre] = useState(false);
+  const [genres, setGenres] = useState([]);  // <-- Aquí vacio inicialmente
+  const [newGenre, setNewGenre] = useState("");
+  const [genreProducts, setGenreProducts] = useState({});
 
-  // Cargar productos desde la API (MongoDB)
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         const response = await fetch('http://localhost:4001/api/products');
-        if (!response.ok) {
-          throw new Error('Error al obtener los productos');
-        }
         const data = await response.json();
-        setAlbums(data);  // Guardar productos en el estado
+        setAlbums(data);
+
+        const grouped = data.reduce((acc, album) => {
+          const genre = album.genre || "Sin género";
+          if (!acc[genre]) acc[genre] = [];
+          acc[genre].push(album);
+          return acc;
+        }, {});
+        setGenreProducts(grouped);
       } catch (error) {
-        console.error("Error al cargar los productos:", error);
+        console.error("Error al cargar productos:", error);
       }
     };
-
     fetchProducts();
   }, []);
 
-  // Abrir modal de edición
-  const openEditModal = (index) => {
-    setEditingAlbumIndex(index);
-    setFormData({ ...albums[index] });  // Rellenar el formulario con los datos del producto seleccionado
-  };
-
-  // Cerrar modal de edición
-  const closeEditModal = () => {
-    setEditingAlbumIndex(null);
-  };
-
-  // Manejar cambios en el formulario de edición
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  
-
-  // Guardar cambios de un producto editado
-  const handleSave = async () => {
-    if (!albums[editingAlbumIndex]?._id) {
-      console.error("ID del producto no válido");
-      return;
-    }
-
-    try {
-      const response = await fetch(`http://localhost:4001/api/products/${albums[editingAlbumIndex]._id}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      });
-
-      if (!response.ok) {
-        throw new Error('Error al guardar el producto');
-      }
-
-      const updatedProduct = await response.json();
-      console.log(updatedProduct);  // Verifica la respuesta
-
-      const updatedAlbums = [...albums];
-      updatedAlbums[editingAlbumIndex] = updatedProduct.product; // Asegúrate de que la respuesta tenga un `product`
-      setAlbums(updatedAlbums);  // Actualizar el estado de los productos
-
-      closeEditModal();
-    } catch (error) {
-      console.error("Error al guardar los cambios:", error);
+  const handleAddGenre = () => {
+    if (newGenre && !genres.includes(newGenre)) {
+      setGenres([...genres, newGenre]);
+      setNewGenre("");
     }
   };
 
-  // Eliminar un producto
-  const handleDelete = async (index) => {
-    try {
-      const productId = albums[index]._id;
-      if (!productId) {
-        console.error("No se pudo obtener el ID del producto");
-        return;
-      }
-
-      const response = await fetch(`http://localhost:4001/api/products/${productId}`, {
-        method: 'DELETE',
-      });
-
-      if (!response.ok) {
-        throw new Error('Error al eliminar el producto');
-      }
-
-      const updatedAlbums = albums.filter((_, i) => i !== index);
-      setAlbums(updatedAlbums);
-    } catch (error) {
-      console.error("Error al eliminar el producto:", error);
-      alert("Hubo un problema al eliminar el producto.");
+  const handleDeleteGenre = (genreToRemove) => {
+    setGenres(genres.filter(g => g !== genreToRemove));
+    if (selectedGenre === genreToRemove) {
+      setSelectedGenre(null);
     }
   };
 
@@ -109,88 +49,83 @@ const Carrito = () => {
     <div className="music-store">
       <div className="banner">
         <img src="/26.26.png" alt="Banner" />
-        <Link to="/agregar-producto" className="btn-add">
-          Agregar productos
-        </Link>
+        <Link to="/agregar-producto" className="btn-add">Agregar productos</Link>
       </div>
 
       <div className="store-layout">
         <aside className="sidebar">
           <div className="sidebar-header">
             <span>Artista</span>
-            <button className="btn-small">Editar</button>
+            <button className="btn-small" onClick={() => setEditingGenre(true)}>Editar</button>
           </div>
           <ul>
-            <li>ac/dc (5)</li>
-            <li>achile (4)</li>
-            <li>aerosmith (3)</li>
-            <li>africa keys (4)</li>
-            <li>arcade fire (10)</li>
-            <li>arctic monkeys (9)</li>
-            <li>ariana grande (5)</li>
-            <li>avril lavigne (5)</li>
-            <li className="mostrar">mostrar más</li>
-          </ul>
-          <ul>
-            <li>classical (10)</li>
-            <li>dance (10)</li>
+            <li
+              style={{ cursor: 'pointer', fontWeight: !selectedGenre ? 'bold' : 'normal' }}
+              onClick={() => setSelectedGenre(null)}
+            >
+              Todos ({albums.length})
+            </li>
+
+            {genres.length === 0 ? (
+              <li style={{ fontStyle: 'italic', color: '#666' }}>
+                No hay géneros agregados
+              </li>
+            ) : (
+              genres.map((genre, index) => (
+                <li
+                  key={index}
+                  style={{ cursor: 'pointer', fontWeight: selectedGenre === genre ? 'bold' : 'normal' }}
+                  onClick={() => setSelectedGenre(genre)}
+                >
+                  {genre} ({genreProducts[genre]?.length || 0})
+                </li>
+              ))
+            )}
           </ul>
         </aside>
 
         <main className="grid">
-          {albums.map((album, i) => (
-            <div className="card" key={i}>
-              <img src={album.imageUrl || '/default.png'} alt={album.productName} />
-              <div className="card-title">
-                <span>{album.productName}</span>
-                <button className="btn-delete" onClick={() => handleDelete(i)}>Borrar</button>
+          {albums
+            .filter(album => !selectedGenre || album.genre === selectedGenre)
+            .map((album, i) => (
+              <div className="card" key={i}>
+                <img src={album.imageUrl || '/default.png'} alt={album.productName} />
+                <div className="card-title">
+                  <span>{album.productName}</span>
+                  <button className="btn-delete">Borrar</button>
+                </div>
+                <div className="card-text">{album.authorName}</div>
+                <div className="card-price">${album.price}</div>
+                <button className="btn-small">Editar</button>
+                <button className="btn-small">Elegir este producto</button>
               </div>
-              <div className="card-text">{album.authorName}</div>
-              <div className="card-price">{album.price}</div>
-              <button className="btn-small" onClick={() => openEditModal(i)}>Editar</button>
-              <button className="btn-small">Elegir este producto</button>
-            </div>
-          ))}
+            ))}
         </main>
       </div>
 
-      {/* Modal para editar */}
-      {editingAlbumIndex !== null && (
+      {editingGenre && (
         <div className="modal-overlay-edit">
           <div className="modal-edit-card">
-            <h2>Editar Producto</h2>
+            <h2>Editar Géneros</h2>
 
-            <label>
-              <input
-                type="text"
-                name="productName"
-                value={formData.productName}
-                onChange={handleChange}
-              />
-            </label>
+            <input
+              type="text"
+              placeholder="Nuevo género"
+              value={newGenre}
+              onChange={(e) => setNewGenre(e.target.value)}
+            />
+            <button onClick={handleAddGenre} className="btn-save">Agregar</button>
 
-            <label>
-              <input
-                type="text"
-                name="authorName"
-                value={formData.authorName}
-                onChange={handleChange}
-              />
-            </label>
+            <ul style={{ marginTop: '10px' }}>
+              {genres.map((genre, idx) => (
+                <li key={idx}>
+                  {genre}
+                  <button className="btn-delete" onClick={() => handleDeleteGenre(genre)}>X</button>
+                </li>
+              ))}
+            </ul>
 
-            <label>
-              <input
-                type="text"
-                name="price"
-                value={formData.price}
-                onChange={handleChange}
-              />
-            </label>
-
-            <div className="modal-buttons-edit">
-              <button className="btn-save" onClick={handleSave}>Guardar</button>
-              <button className="btn-cancel" onClick={closeEditModal}>Cancelar</button>
-            </div>
+            <button onClick={() => setEditingGenre(false)} className="btn-cancel">Cerrar</button>
           </div>
         </div>
       )}

@@ -1,5 +1,4 @@
 
-
 body {
   margin: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -220,3 +219,65 @@ body {
   cursor: pointer;
 }
 
+/* Ajusta el layout principal en pantallas pequeñas */
+@media (max-width: 768px) {
+  .store-layout {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  /* Que los elementos de la lista no se vean apretados */
+  .sidebar ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .sidebar li {
+    flex: 1 1 auto;
+    text-align: center;
+    margin-bottom: 0;
+    padding: 0.5rem;
+    border-radius: 4px;
+    background-color: #f7f7f7;
+    transition: background-color 0.3s;
+  }
+
+  .sidebar li:hover {
+    background-color: #e2e6ea;
+  }
+
+  /* Botón editar en sidebar pequeño */
+  .sidebar-header button {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.8rem;
+  }
+
+  /* Cards ocupan todo el ancho en móvil */
+  .grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Para pantallas muy pequeñas */
+@media (max-width: 400px) {
+  .btn-add {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+  }
+
+  .card-title {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .btn-small {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.75rem;
+    margin: 0.15rem;
+  }
+}

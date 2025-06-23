@@ -10,6 +10,7 @@ import Pago from "./pages/Pago";
 import Productos from "./pages/Producto";
 import { AuthProvider } from './context/AuthContext';
 import PrivateRoute from './components/PrivateRoute';
+import Contactmen from "./pages/ContactM";
  
 function App() {
   useEffect(() => {
@@ -31,6 +32,7 @@ function App() {
             <Route path="/carrito" element={<Carrito />} />
              <Route path="/metodop" element={<Metododepago />} />
             <Route path="/agregar-producto" element={<Productos />} />
+            <Route path="/contactosMensaje" element={<Contactmen/>} />
            
             {/* Protegidas */}
             <Route element={<PrivateRoute />}>
