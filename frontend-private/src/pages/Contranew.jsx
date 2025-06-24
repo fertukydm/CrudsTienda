@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"; // ⬅️ Importar useNavigate
-import "./ContraNew.css";
+import "./Contranew.css";
+
 
 const Contranuevaa = () => {
   const [password, setPassword] = useState("");
