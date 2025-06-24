@@ -83,11 +83,7 @@ const Navbar = () => {
                   Productos
                 </Link>
               </li>
-              <li className="menu-item">
-                <Link to="/RegistrarEmpleado" className="menu-link" onClick={() => setMenuOpen(false)}>
-                  Registrar Empleado
-                </Link>
-              </li>
+            
               <li className="menu-item">
                 <Link to="/ProcesodePago" className="menu-link" onClick={() => setMenuOpen(false)}>
                   Proceso de Pago

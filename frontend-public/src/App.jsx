@@ -6,7 +6,7 @@ import Contact from './pages/contact';
 import Policy from './pages/policy'; 
 import Login from "./pages/login";
 import CrearCuenta from './pages/CrearCuenta';
-import RegistrarEmpleado from './pages/RegistrarEmpleado';
+//import RegistrarEmpleado from './pages/RegistrarEmpleado';
 import Product from "./pages/Products";
 import Review from "./pages/Reviews";
 import Carrito from './pages/Carrito';
@@ -26,7 +26,7 @@ function App() {
         <Route path="/login" element={<Login/>} />
         <Route path="/crear-cuenta" element={<CrearCuenta/>} />
         <Route path="/ProcesodePago" element={<ProcesoPago/>} />
-        <Route path="/RegistrarEmpleado" element={<RegistrarEmpleado />} />
+        
         <Route path="/producto" element={<Product />} />
         <Route path="/Carrito" element={<Carrito/>} />
         <Route path="/Review/:id" element={<Review/>} /> 

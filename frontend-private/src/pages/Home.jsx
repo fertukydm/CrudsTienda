@@ -1,54 +1,44 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Home.css";
 import toast from 'react-hot-toast';
+import { useNavigate } from "react-router-dom";
 
-const Home = ({ agregarAlCarrito }) => {
+const Home = ({ agregarAlCarrito, esAdmin }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [productoSeleccionado, setProductoSeleccionado] = useState(null);
+  const [productos, setProductos] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
-  const productosInfo = {
-    1: {
-      id: 1,
-      nombre: "I love you",
-      descripcion: "Álbum debut de The Neighbourhood",
-      precio: 49,
-      imagen: "/8.8.png"
-    },
-    2: {
-      id: 2,
-      nombre: "Orquídeas",
-      descripcion: "Álbum de Kali Uchis lanzado en 2024",
-      precio: 67,
-      imagen: "/9.9.png"
-    },
-    3: {
-      id: 3,
-      nombre: "After Hours",
-      descripcion: "Álbum de The Weeknd lanzado en 2020",
-      precio: 59,
-      imagen: "/10.10.png"
-    },
-    4: {
-      id: 4,
-      nombre: "CINEMA",
-      descripcion: "Álbum debut de The Marías (2021)",
-      precio: 62,
-      imagen: "/11.11.png"
+  useEffect(() => {
+    fetchProductos();
+  }, []);
+
+  const fetchProductos = async () => {
+    try {
+      const res = await fetch("http://localhost:4001/api/products");
+      const data = await res.json();
+      setProductos(data);
+    } catch (error) {
+      console.error("❌ Error al cargar productos:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
   const handleAgregar = () => {
     if (productoSeleccionado) {
       agregarAlCarrito({ ...productoSeleccionado, quantity: 1 });
-      toast.success(`✅ "${productoSeleccionado.nombre}" fue agregado al carrito.`);
+      toast.success(`✅ "${productoSeleccionado.productName}" fue agregado al carrito.`);
       setProductoSeleccionado(null);
     }
   };
 
-  const productosFiltrados = Object.entries(productosInfo).filter(
-    ([, producto]) =>
-      producto.nombre.toLowerCase().includes(searchTerm.toLowerCase())
+  const productosFiltrados = productos.filter(producto =>
+    producto.productName.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  if (loading) return <div className="cargando">Cargando productos...</div>;
 
   return (
     <div className="background-image">
@@ -73,13 +63,17 @@ const Home = ({ agregarAlCarrito }) => {
         <div className="featured-products">
           <h3 className="featured-title">Productos destacados</h3>
           <div className="products-container">
-            {productosFiltrados.map(([key, item]) => (
+            {productosFiltrados.map((item) => (
               <div
-                key={key}
+                key={item._id}
                 className="product-item"
                 onClick={() => setProductoSeleccionado(item)}
               >
-                <img src={item.imagen} alt={item.nombre} className="product-img" />
+                <img
+                  src={item.imageUrl || "/default.png"}
+                  alt={item.productName}
+                  className="product-img"
+                />
               </div>
             ))}
           </div>
@@ -89,13 +83,23 @@ const Home = ({ agregarAlCarrito }) => {
       {productoSeleccionado && (
         <div className="modal-overlay" onClick={() => setProductoSeleccionado(null)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <h3>{productoSeleccionado.nombre}</h3>
-            <p>{productoSeleccionado.descripcion}</p>
-            <p><strong>Precio:</strong> ${productoSeleccionado.precio.toFixed(2)}</p>
+            <h3>{productoSeleccionado.productName}</h3>
+            <p>{productoSeleccionado.description}</p>
+            <p><strong>Precio:</strong> ${productoSeleccionado.price.toFixed(2)}</p>
+
             <div style={{ display: "flex", gap: "10px", justifyContent: "center", marginTop: "15px" }}>
-              <button onClick={handleAgregar} className="btn-agregar">
-                Agregar al carrito
-              </button>
+              {esAdmin ? (
+                <button
+                  className="btn-editar"
+                  onClick={() => navigate(`/editar-producto/${productoSeleccionado._id}`)}
+                >
+                  Editar producto
+                </button>
+              ) : (
+                <button onClick={handleAgregar} className="btn-agregar">
+                  Agregar al carrito
+                </button>
+              )}
               <button onClick={() => setProductoSeleccionado(null)} className="btn-cancelar">
                 Cerrar
               </button>
