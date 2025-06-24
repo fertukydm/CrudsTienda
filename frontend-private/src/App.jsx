@@ -104,6 +104,7 @@ function App() {
           {/* Rutas protegidas */}
           <Route element={<PrivateRoute />}>
             <Route path="/pago" element={<Pago />} />
+            
           </Route>
         </Routes>
       </>

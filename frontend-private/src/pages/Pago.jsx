@@ -3,29 +3,57 @@ import './Pago.css';
 
 const FormularioPago = () => {
   const [formData, setFormData] = useState({
-    email: '',
-    nombre: '',
-    apellidos: '',
-    direccion: '',
-    ciudad: '',
-    codigoPostal: '',
-    region: '',
-    telefono: '',
     metodoEntrega: 'envio',
     novedades: false,
     guardarInfo: false,
   });
 
-  const [editableFields, setEditableFields] = useState({
-    email: false,
-    nombre: false,
-    apellidos: false,
-    direccion: false,
-    ciudad: false,
-    codigoPostal: false,
-    region: false,
-    telefono: false,
+  const [customFields, setCustomFields] = useState({
+    nombre: { label: "Nombre", value: "", editable: false },
+    apellidos: { label: "Apellidos", value: "", editable: false },
+    direccion: { label: "Dirección", value: "", editable: false },
+    ciudad: { label: "Ciudad", value: "", editable: false },
+    codigoPostal: { label: "Código Postal", value: "", editable: false },
+    region: { label: "Región", value: "", editable: false },
+    pais: { label: "País", value: "", editable: false },
+    telefono: { label: "Teléfono", value: "", editable: false },
+    email: { label: "Correo Electrónico", value: "", editable: false },
   });
+
+  const [deliveryLabels, setDeliveryLabels] = useState({
+    envio: { text: "Envío", editable: false },
+    retiro: { text: "Retiro en tienda", editable: false },
+  });
+
+  const handleCustomChange = (key, value) => {
+    setCustomFields(prev => ({
+      ...prev,
+      [key]: {
+        ...prev[key],
+        value,
+      }
+    }));
+  };
+
+  const handleEditLabel = (key, newLabel) => {
+    setCustomFields(prev => ({
+      ...prev,
+      [key]: {
+        ...prev[key],
+        label: newLabel || prev[key].label,
+      }
+    }));
+  };
+
+  const toggleFieldEditable = (key) => {
+    setCustomFields(prev => ({
+      ...prev,
+      [key]: {
+        ...prev[key],
+        editable: !prev[key].editable,
+      }
+    }));
+  };
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -35,25 +63,45 @@ const FormularioPago = () => {
     });
   };
 
-  const handleEditar = (campo) => {
-    setEditableFields((prev) => ({
+  const toggleDeliveryEditable = (tipo) => {
+    setDeliveryLabels(prev => ({
       ...prev,
-      [campo]: true,
+      [tipo]: {
+        ...prev[tipo],
+        editable: !prev[tipo].editable,
+      }
+    }));
+  };
+
+  const handleEditDeliveryLabel = (tipo, newText) => {
+    setDeliveryLabels(prev => ({
+      ...prev,
+      [tipo]: {
+        ...prev[tipo],
+        text: newText || prev[tipo].text,
+      }
     }));
   };
 
   const handlePago = async () => {
     try {
+      const datosPago = {
+        ...formData,
+        ...Object.fromEntries(
+          Object.entries(customFields).map(([key, field]) => [key, field.value])
+        ),
+      };
+
       const res = await fetch("http://localhost:4001/api/pay", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ paymentMethod: "Wompi" }),
+        body: JSON.stringify(datosPago),
       });
 
       const data = await res.json();
-      console.log(data);
+      console.log("Respuesta del servidor:", data);
       window.location.href = "https://checkout.wompi.sv";
     } catch (error) {
       console.error("Error al enviar método de pago:", error);
@@ -66,19 +114,28 @@ const FormularioPago = () => {
         <form className="formulario">
           <img src="/16.16.png" alt="Encabezado" className="imagen-encabezado" />
 
-          <div className="grupo-input">
-            <label htmlFor="email">Correo Electrónico</label>
-            <input
-              id="email"
-              name="email"
-              type="email"
-              value={formData.email}
-              onChange={handleInputChange}
-              disabled={!editableFields.email}
-              placeholder="Correo Electrónico"
-            />
-            <button type="button" onClick={() => handleEditar("email")}>Editar</button>
-          </div>
+          {Object.entries(customFields).map(([key, field]) => (
+            <div key={key} className="grupo-input">
+              <label>{field.label}</label>
+              <input
+                type="text"
+                name={key}
+                value={field.value}
+                onChange={(e) => handleCustomChange(key, e.target.value)}
+                placeholder={`Ingresa ${field.label.toLowerCase()}`}
+              />
+              {field.editable && (
+                <input
+                  type="text"
+                  placeholder="Cambiar nombre del campo"
+                  onBlur={(e) => handleEditLabel(key, e.target.value)}
+                />
+              )}
+              <button type="button" onClick={() => toggleFieldEditable(key)}>
+                {field.editable ? "Bloquear etiqueta" : "Editar etiqueta"}
+              </button>
+            </div>
+          ))}
 
           <div className="grupo-checkbox">
             <input
@@ -88,114 +145,53 @@ const FormularioPago = () => {
               checked={formData.novedades}
               onChange={handleInputChange}
             />
-            <label htmlFor="news">Enviarme novedades y ofertas por correo electrónico</label>
+            <label htmlFor="news">Enviarme novedades y ofertas por correo</label>
           </div>
 
           <div className="grupo-radio">
-            <input
-              type="radio"
-              id="envio"
-              name="metodoEntrega"
-              value="envio"
-              checked={formData.metodoEntrega === 'envio'}
-              onChange={handleInputChange}
-            />
-            <label htmlFor="envio">Envío</label>
+            <div style={{ marginBottom: '0.5rem' }}>
+              <input
+                type="radio"
+                id="envio"
+                name="metodoEntrega"
+                value="envio"
+                checked={formData.metodoEntrega === 'envio'}
+                onChange={handleInputChange}
+              />
+              <label htmlFor="envio">{deliveryLabels.envio.text}</label>
+              {deliveryLabels.envio.editable && (
+                <input
+                  type="text"
+                  placeholder="Editar texto"
+                  onBlur={(e) => handleEditDeliveryLabel("envio", e.target.value)}
+                />
+              )}
+              <button type="button" onClick={() => toggleDeliveryEditable("envio")}>
+                {deliveryLabels.envio.editable ? "Bloquear texto" : "Editar texto"}
+              </button>
+            </div>
 
-            <input
-              type="radio"
-              id="retiro"
-              name="metodoEntrega"
-              value="retiro"
-              checked={formData.metodoEntrega === 'retiro'}
-              onChange={handleInputChange}
-            />
-            <label htmlFor="retiro">Retiro en tienda</label>
-          </div>
-
-          <div className="grupo-nombre">
-            <input
-              type="text"
-              name="nombre"
-              value={formData.nombre}
-              onChange={handleInputChange}
-              disabled={!editableFields.nombre}
-              placeholder="Nombre"
-            />
-            <input
-              type="text"
-              name="apellidos"
-              value={formData.apellidos}
-              onChange={handleInputChange}
-              disabled={!editableFields.apellidos}
-              placeholder="Apellidos"
-            />
-            <button
-              type="button"
-              onClick={() => {
-                handleEditar("nombre");
-                handleEditar("apellidos");
-              }}
-            >Editar</button>
-          </div>
-
-          <div className="grupo-direccion">
-            <input
-              type="text"
-              name="direccion"
-              value={formData.direccion}
-              onChange={handleInputChange}
-              disabled={!editableFields.direccion}
-              placeholder="Dirección"
-            />
-            <button type="button" onClick={() => handleEditar("direccion")}>Editar</button>
-          </div>
-
-          <div className="grupo-ciudad">
-            <input
-              type="text"
-              name="ciudad"
-              value={formData.ciudad}
-              onChange={handleInputChange}
-              disabled={!editableFields.ciudad}
-              placeholder="Ciudad"
-            />
-            <input
-              type="text"
-              name="codigoPostal"
-              value={formData.codigoPostal}
-              onChange={handleInputChange}
-              disabled={!editableFields.codigoPostal}
-              placeholder="Código Postal"
-            />
-            <input
-              type="text"
-              name="region"
-              value={formData.region}
-              onChange={handleInputChange}
-              disabled={!editableFields.region}
-              placeholder="Región"
-            />
-            <button
-              type="button"
-              onClick={() => {
-                handleEditar("ciudad");
-                handleEditar("codigoPostal");
-                handleEditar("region");
-              }}
-            >Editar</button>
-          </div>
-
-          <div className="grupo-telefono">
-            <input
-              type="text"
-              name="telefono"
-              value={formData.telefono}
-              onChange={handleInputChange}
-              disabled={!editableFields.telefono}
-              placeholder="Teléfono"
-            />
-            <button type="button" onClick={() => handleEditar("telefono")}>Editar</button>
+            <div>
+              <input
+                type="radio"
+                id="retiro"
+                name="metodoEntrega"
+                value="retiro"
+                checked={formData.metodoEntrega === 'retiro'}
+                onChange={handleInputChange}
+              />
+              <label htmlFor="retiro">{deliveryLabels.retiro.text}</label>
+              {deliveryLabels.retiro.editable && (
+                <input
+                  type="text"
+                  placeholder="Editar texto"
+                  onBlur={(e) => handleEditDeliveryLabel("retiro", e.target.value)}
+                />
+              )}
+              <button type="button" onClick={() => toggleDeliveryEditable("retiro")}>
+                {deliveryLabels.retiro.editable ? "Bloquear texto" : "Editar texto"}
+              </button>
+            </div>
           </div>
 
           <div className="grupo-checkbox">
@@ -206,9 +202,7 @@ const FormularioPago = () => {
               checked={formData.guardarInfo}
               onChange={handleInputChange}
             />
-            <label htmlFor="guardar">
-              Guardar mi información y consultar más rápidamente la próxima vez
-            </label>
+            <label htmlFor="guardar">Guardar mi información para próxima vez</label>
           </div>
         </form>
 
@@ -225,7 +219,7 @@ const FormularioPago = () => {
             </div>
             <div className="cuadro-tarjeta"></div>
             <p className="descripcion">
-              Después de hacer clic en "Pagar ahora", serás redirigido a Wompi El Salvador para completar tu compra de forma segura.
+              Serás redirigido a Wompi para completar tu compra de forma segura.
             </p>
           </div>
         </div>
